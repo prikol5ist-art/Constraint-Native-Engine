@@ -1,3 +1,23 @@
+public abstract interface class io/github/constraintnative/solver/ConstraintSolver {
+	public abstract fun solve (Lio/github/constraintnative/core/SolveRequest;)Lio/github/constraintnative/core/SolveResult;
+}
+
+public final class io/github/constraintnative/solver/DeterministicSolver : io/github/constraintnative/solver/ConstraintSolver {
+	public fun <init> ()V
+	public fun <init> (Lio/github/constraintnative/solver/DeterministicSolver$MonotonicClock;)V
+	public synthetic fun <init> (Lio/github/constraintnative/solver/DeterministicSolver$MonotonicClock;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun solve (Lio/github/constraintnative/core/SolveRequest;)Lio/github/constraintnative/core/SolveResult;
+}
+
+public abstract interface class io/github/constraintnative/solver/DeterministicSolver$MonotonicClock {
+	public abstract fun markNow ()J
+}
+
+public final class io/github/constraintnative/solver/DeterministicSolver$SystemClock : io/github/constraintnative/solver/DeterministicSolver$MonotonicClock {
+	public static final field INSTANCE Lio/github/constraintnative/solver/DeterministicSolver$SystemClock;
+	public fun markNow ()J
+}
+
 public final class io/github/constraintnative/solver/SolutionCanonicalizer {
 	public static final field INSTANCE Lio/github/constraintnative/solver/SolutionCanonicalizer;
 	public final fun canonicalize-bWmvGgA (Ljava/util/List;)Ljava/lang/String;
