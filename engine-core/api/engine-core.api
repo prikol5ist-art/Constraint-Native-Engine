@@ -1,0 +1,519 @@
+public final class io/github/constraintnative/core/Assignment {
+	public synthetic fun <init> (Ljava/lang/String;Lio/github/constraintnative/core/Candidate;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-y6i6-oA ()Ljava/lang/String;
+	public final fun component2 ()Lio/github/constraintnative/core/Candidate;
+	public final fun copy-JomVgUo (Ljava/lang/String;Lio/github/constraintnative/core/Candidate;)Lio/github/constraintnative/core/Assignment;
+	public static synthetic fun copy-JomVgUo$default (Lio/github/constraintnative/core/Assignment;Ljava/lang/String;Lio/github/constraintnative/core/Candidate;ILjava/lang/Object;)Lio/github/constraintnative/core/Assignment;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCandidate ()Lio/github/constraintnative/core/Candidate;
+	public final fun getSlot-y6i6-oA ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/constraintnative/core/Candidate {
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Object;Ljava/util/Set;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Object;Ljava/util/Set;Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-REV2AeI ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/Object;
+	public final fun component3 ()Ljava/util/Set;
+	public final fun component4-LfkLHHw ()Ljava/lang/String;
+	public final fun copy-7L_KGX8 (Ljava/lang/String;Ljava/lang/Object;Ljava/util/Set;Ljava/lang/String;)Lio/github/constraintnative/core/Candidate;
+	public static synthetic fun copy-7L_KGX8$default (Lio/github/constraintnative/core/Candidate;Ljava/lang/String;Ljava/lang/Object;Ljava/util/Set;Ljava/lang/String;ILjava/lang/Object;)Lio/github/constraintnative/core/Candidate;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAttributes ()Ljava/lang/Object;
+	public final fun getEligibleSlots ()Ljava/util/Set;
+	public final fun getGroupId-LfkLHHw ()Ljava/lang/String;
+	public final fun getId-REV2AeI ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/constraintnative/core/CandidateId {
+	public static final field Companion Lio/github/constraintnative/core/CandidateId$Companion;
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lio/github/constraintnative/core/CandidateId;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/core/CandidateId$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/core/CandidateId$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize-KhwqCiA (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize--7QiM0g (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/CandidateId$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class io/github/constraintnative/core/ConstraintVerdict {
+	public static final field Companion Lio/github/constraintnative/core/ConstraintVerdict$Companion;
+}
+
+public final class io/github/constraintnative/core/ConstraintVerdict$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/ConstraintVerdict$Satisfied : io/github/constraintnative/core/ConstraintVerdict {
+	public static final field INSTANCE Lio/github/constraintnative/core/ConstraintVerdict$Satisfied;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/constraintnative/core/ConstraintVerdict$Undetermined : io/github/constraintnative/core/ConstraintVerdict {
+	public static final field INSTANCE Lio/github/constraintnative/core/ConstraintVerdict$Undetermined;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/constraintnative/core/ConstraintVerdict$Violated : io/github/constraintnative/core/ConstraintVerdict {
+	public static final field Companion Lio/github/constraintnative/core/ConstraintVerdict$Violated$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lio/github/constraintnative/core/ConstraintVerdict$Violated;
+	public static synthetic fun copy$default (Lio/github/constraintnative/core/ConstraintVerdict$Violated;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/github/constraintnative/core/ConstraintVerdict$Violated;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCode ()Ljava/lang/String;
+	public final fun getMessage ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/core/ConstraintVerdict$Violated$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/core/ConstraintVerdict$Violated$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/constraintnative/core/ConstraintVerdict$Violated;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/constraintnative/core/ConstraintVerdict$Violated;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/ConstraintVerdict$Violated$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/FeasibleSolution {
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/List;Ljava/util/List;DLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-Mc_HdBo ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()D
+	public final fun copy-uie3Bxs (Ljava/lang/String;Ljava/util/List;Ljava/util/List;D)Lio/github/constraintnative/core/FeasibleSolution;
+	public static synthetic fun copy-uie3Bxs$default (Lio/github/constraintnative/core/FeasibleSolution;Ljava/lang/String;Ljava/util/List;Ljava/util/List;DILjava/lang/Object;)Lio/github/constraintnative/core/FeasibleSolution;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAssignments ()Ljava/util/List;
+	public final fun getId-Mc_HdBo ()Ljava/lang/String;
+	public final fun getScoreComponents ()Ljava/util/List;
+	public final fun getTotalScore ()D
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/constraintnative/core/GroupId {
+	public static final field Companion Lio/github/constraintnative/core/GroupId$Companion;
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lio/github/constraintnative/core/GroupId;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/core/GroupId$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/core/GroupId$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize-gi1e9zM (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize-WLj-mw8 (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/GroupId$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class io/github/constraintnative/core/HardConstraint {
+	public abstract fun evaluate (Lio/github/constraintnative/core/PartialAssembly;Ljava/lang/Object;)Lio/github/constraintnative/core/ConstraintVerdict;
+}
+
+public final class io/github/constraintnative/core/PartialAssembly {
+	public fun <init> (Ljava/util/List;Z)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Z
+	public final fun copy (Ljava/util/List;Z)Lio/github/constraintnative/core/PartialAssembly;
+	public static synthetic fun copy$default (Lio/github/constraintnative/core/PartialAssembly;Ljava/util/List;ZILjava/lang/Object;)Lio/github/constraintnative/core/PartialAssembly;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAssignments ()Ljava/util/List;
+	public final fun getComplete ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/constraintnative/core/ScoreComponent {
+	public static final field Companion Lio/github/constraintnative/core/ScoreComponent$Companion;
+	public fun <init> (Ljava/lang/String;D)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()D
+	public final fun copy (Ljava/lang/String;D)Lio/github/constraintnative/core/ScoreComponent;
+	public static synthetic fun copy$default (Lio/github/constraintnative/core/ScoreComponent;Ljava/lang/String;DILjava/lang/Object;)Lio/github/constraintnative/core/ScoreComponent;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName ()Ljava/lang/String;
+	public final fun getValue ()D
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/core/ScoreComponent$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/core/ScoreComponent$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/constraintnative/core/ScoreComponent;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/constraintnative/core/ScoreComponent;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/ScoreComponent$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/SearchBudget {
+	public static final field Companion Lio/github/constraintnative/core/SearchBudget$Companion;
+	public fun <init> (JJI)V
+	public final fun component1 ()J
+	public final fun component2 ()J
+	public final fun component3 ()I
+	public final fun copy (JJI)Lio/github/constraintnative/core/SearchBudget;
+	public static synthetic fun copy$default (Lio/github/constraintnative/core/SearchBudget;JJIILjava/lang/Object;)Lio/github/constraintnative/core/SearchBudget;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBeamWidth ()I
+	public final fun getMaxDurationMillis ()J
+	public final fun getMaxExpandedNodes ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/core/SearchBudget$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/core/SearchBudget$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/constraintnative/core/SearchBudget;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/constraintnative/core/SearchBudget;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/SearchBudget$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/SearchMode : java/lang/Enum {
+	public static final field BOUNDED_BEAM Lio/github/constraintnative/core/SearchMode;
+	public static final field EXACT Lio/github/constraintnative/core/SearchMode;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/constraintnative/core/SearchMode;
+	public static fun values ()[Lio/github/constraintnative/core/SearchMode;
+}
+
+public final class io/github/constraintnative/core/SearchTermination : java/lang/Enum {
+	public static final field EXHAUSTIVE Lio/github/constraintnative/core/SearchTermination;
+	public static final field INFEASIBLE Lio/github/constraintnative/core/SearchTermination;
+	public static final field NODE_BUDGET_EXHAUSTED Lio/github/constraintnative/core/SearchTermination;
+	public static final field SOLUTION_LIMIT_REACHED Lio/github/constraintnative/core/SearchTermination;
+	public static final field TIME_BUDGET_EXHAUSTED Lio/github/constraintnative/core/SearchTermination;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/constraintnative/core/SearchTermination;
+	public static fun values ()[Lio/github/constraintnative/core/SearchTermination;
+}
+
+public final class io/github/constraintnative/core/SlotId {
+	public static final field Companion Lio/github/constraintnative/core/SlotId$Companion;
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lio/github/constraintnative/core/SlotId;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/core/SlotId$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/core/SlotId$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize-3wXvHGI (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize-O0wKd5s (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/SlotId$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/SlotRequirement {
+	public synthetic fun <init> (Ljava/lang/String;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-y6i6-oA ()Ljava/lang/String;
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun copy-xUdPvRE (Ljava/lang/String;II)Lio/github/constraintnative/core/SlotRequirement;
+	public static synthetic fun copy-xUdPvRE$default (Lio/github/constraintnative/core/SlotRequirement;Ljava/lang/String;IIILjava/lang/Object;)Lio/github/constraintnative/core/SlotRequirement;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMax ()I
+	public final fun getMin ()I
+	public final fun getSlot-y6i6-oA ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class io/github/constraintnative/core/SoftScorer {
+	public abstract fun score (Lio/github/constraintnative/core/PartialAssembly;Ljava/lang/Object;)Lio/github/constraintnative/core/ScoreComponent;
+}
+
+public final class io/github/constraintnative/core/SolutionId {
+	public static final field Companion Lio/github/constraintnative/core/SolutionId$Companion;
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lio/github/constraintnative/core/SolutionId;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/core/SolutionId$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/core/SolutionId$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize-bWmvGgA (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize-b5wc9ow (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/SolutionId$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/SolveRequest {
+	public fun <init> (Ljava/util/List;Ljava/util/List;Ljava/lang/Object;Ljava/util/List;Ljava/util/List;ILio/github/constraintnative/core/SearchMode;Lio/github/constraintnative/core/SearchBudget;J)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Ljava/lang/Object;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Ljava/util/List;
+	public final fun component6 ()I
+	public final fun component7 ()Lio/github/constraintnative/core/SearchMode;
+	public final fun component8 ()Lio/github/constraintnative/core/SearchBudget;
+	public final fun component9 ()J
+	public final fun copy (Ljava/util/List;Ljava/util/List;Ljava/lang/Object;Ljava/util/List;Ljava/util/List;ILio/github/constraintnative/core/SearchMode;Lio/github/constraintnative/core/SearchBudget;J)Lio/github/constraintnative/core/SolveRequest;
+	public static synthetic fun copy$default (Lio/github/constraintnative/core/SolveRequest;Ljava/util/List;Ljava/util/List;Ljava/lang/Object;Ljava/util/List;Ljava/util/List;ILio/github/constraintnative/core/SearchMode;Lio/github/constraintnative/core/SearchBudget;JILjava/lang/Object;)Lio/github/constraintnative/core/SolveRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCandidates ()Ljava/util/List;
+	public final fun getContext ()Ljava/lang/Object;
+	public final fun getDesiredSolutions ()I
+	public final fun getHardConstraints ()Ljava/util/List;
+	public final fun getSearchBudget ()Lio/github/constraintnative/core/SearchBudget;
+	public final fun getSearchMode ()Lio/github/constraintnative/core/SearchMode;
+	public final fun getSeed ()J
+	public final fun getSlots ()Ljava/util/List;
+	public final fun getSoftScorers ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/constraintnative/core/SolveResult {
+	public fun <init> (Ljava/util/List;Lio/github/constraintnative/core/SearchTermination;JLjava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Lio/github/constraintnative/core/SearchTermination;
+	public final fun component3 ()J
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;Lio/github/constraintnative/core/SearchTermination;JLjava/util/List;)Lio/github/constraintnative/core/SolveResult;
+	public static synthetic fun copy$default (Lio/github/constraintnative/core/SolveResult;Ljava/util/List;Lio/github/constraintnative/core/SearchTermination;JLjava/util/List;ILjava/lang/Object;)Lio/github/constraintnative/core/SolveResult;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExpandedNodes ()J
+	public final fun getSolutions ()Ljava/util/List;
+	public final fun getTermination ()Lio/github/constraintnative/core/SearchTermination;
+	public final fun getTrace ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class io/github/constraintnative/core/TraceEvent {
+	public static final field Companion Lio/github/constraintnative/core/TraceEvent$Companion;
+	public abstract fun getMessage ()Ljava/lang/String;
+	public abstract fun getSequence ()J
+}
+
+public final class io/github/constraintnative/core/TraceEvent$CandidateRejected : io/github/constraintnative/core/TraceEvent {
+	public static final field Companion Lio/github/constraintnative/core/TraceEvent$CandidateRejected$Companion;
+	public synthetic fun <init> (JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()J
+	public final fun component2-REV2AeI ()Ljava/lang/String;
+	public final fun component3-y6i6-oA ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun copy-M8fCKh8 (JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lio/github/constraintnative/core/TraceEvent$CandidateRejected;
+	public static synthetic fun copy-M8fCKh8$default (Lio/github/constraintnative/core/TraceEvent$CandidateRejected;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/github/constraintnative/core/TraceEvent$CandidateRejected;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCandidateId-REV2AeI ()Ljava/lang/String;
+	public fun getMessage ()Ljava/lang/String;
+	public final fun getReason ()Ljava/lang/String;
+	public fun getSequence ()J
+	public final fun getSlotId-y6i6-oA ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/core/TraceEvent$CandidateRejected$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/core/TraceEvent$CandidateRejected$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/constraintnative/core/TraceEvent$CandidateRejected;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/constraintnative/core/TraceEvent$CandidateRejected;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/TraceEvent$CandidateRejected$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/TraceEvent$Companion {
+	public final fun sanitizeMessage (Ljava/lang/String;)Ljava/lang/String;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/TraceEvent$PartialAssemblyPruned : io/github/constraintnative/core/TraceEvent {
+	public static final field Companion Lio/github/constraintnative/core/TraceEvent$PartialAssemblyPruned$Companion;
+	public synthetic fun <init> (JLjava/lang/String;Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()J
+	public final fun component2-y6i6-oA ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy-ChmmabQ (JLjava/lang/String;Ljava/lang/String;)Lio/github/constraintnative/core/TraceEvent$PartialAssemblyPruned;
+	public static synthetic fun copy-ChmmabQ$default (Lio/github/constraintnative/core/TraceEvent$PartialAssemblyPruned;JLjava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/github/constraintnative/core/TraceEvent$PartialAssemblyPruned;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getMessage ()Ljava/lang/String;
+	public final fun getReason ()Ljava/lang/String;
+	public fun getSequence ()J
+	public final fun getSlotId-y6i6-oA ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/core/TraceEvent$PartialAssemblyPruned$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/core/TraceEvent$PartialAssemblyPruned$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/constraintnative/core/TraceEvent$PartialAssemblyPruned;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/constraintnative/core/TraceEvent$PartialAssemblyPruned;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/TraceEvent$PartialAssemblyPruned$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/TraceEvent$SearchStopped : io/github/constraintnative/core/TraceEvent {
+	public static final field Companion Lio/github/constraintnative/core/TraceEvent$SearchStopped$Companion;
+	public fun <init> (JLjava/lang/String;)V
+	public final fun component1 ()J
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (JLjava/lang/String;)Lio/github/constraintnative/core/TraceEvent$SearchStopped;
+	public static synthetic fun copy$default (Lio/github/constraintnative/core/TraceEvent$SearchStopped;JLjava/lang/String;ILjava/lang/Object;)Lio/github/constraintnative/core/TraceEvent$SearchStopped;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getMessage ()Ljava/lang/String;
+	public final fun getReason ()Ljava/lang/String;
+	public fun getSequence ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/core/TraceEvent$SearchStopped$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/core/TraceEvent$SearchStopped$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/constraintnative/core/TraceEvent$SearchStopped;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/constraintnative/core/TraceEvent$SearchStopped;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/TraceEvent$SearchStopped$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/TraceEvent$SolutionAccepted : io/github/constraintnative/core/TraceEvent {
+	public static final field Companion Lio/github/constraintnative/core/TraceEvent$SolutionAccepted$Companion;
+	public synthetic fun <init> (JLjava/lang/String;DLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()J
+	public final fun component2-Mc_HdBo ()Ljava/lang/String;
+	public final fun component3 ()D
+	public final fun copy-6sVpldE (JLjava/lang/String;D)Lio/github/constraintnative/core/TraceEvent$SolutionAccepted;
+	public static synthetic fun copy-6sVpldE$default (Lio/github/constraintnative/core/TraceEvent$SolutionAccepted;JLjava/lang/String;DILjava/lang/Object;)Lio/github/constraintnative/core/TraceEvent$SolutionAccepted;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getMessage ()Ljava/lang/String;
+	public final fun getScore ()D
+	public fun getSequence ()J
+	public final fun getSolutionId-Mc_HdBo ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/core/TraceEvent$SolutionAccepted$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/core/TraceEvent$SolutionAccepted$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/constraintnative/core/TraceEvent$SolutionAccepted;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/constraintnative/core/TraceEvent$SolutionAccepted;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/core/TraceEvent$SolutionAccepted$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
