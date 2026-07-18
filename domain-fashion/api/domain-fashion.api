@@ -1,0 +1,94 @@
+public final class io/github/constraintnative/fashion/ColorHarmonyScorer : io/github/constraintnative/core/SoftScorer {
+	public fun <init> ()V
+	public fun score (Lio/github/constraintnative/core/PartialAssembly;Lio/github/constraintnative/fashion/FashionContext;)Lio/github/constraintnative/core/ScoreComponent;
+	public synthetic fun score (Lio/github/constraintnative/core/PartialAssembly;Ljava/lang/Object;)Lio/github/constraintnative/core/ScoreComponent;
+}
+
+public final class io/github/constraintnative/fashion/FashionCandidate {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ID)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()I
+	public final fun component6 ()D
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ID)Lio/github/constraintnative/fashion/FashionCandidate;
+	public static synthetic fun copy$default (Lio/github/constraintnative/fashion/FashionCandidate;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IDILjava/lang/Object;)Lio/github/constraintnative/fashion/FashionCandidate;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getColor ()Ljava/lang/String;
+	public final fun getFormalness ()D
+	public final fun getId ()Ljava/lang/String;
+	public final fun getLayer ()I
+	public final fun getName ()Ljava/lang/String;
+	public final fun getType ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/constraintnative/fashion/FashionContext {
+	public fun <init> (DLio/github/constraintnative/fashion/Precipitation;Lio/github/constraintnative/fashion/Occasion;)V
+	public final fun component1 ()D
+	public final fun component2 ()Lio/github/constraintnative/fashion/Precipitation;
+	public final fun component3 ()Lio/github/constraintnative/fashion/Occasion;
+	public final fun copy (DLio/github/constraintnative/fashion/Precipitation;Lio/github/constraintnative/fashion/Occasion;)Lio/github/constraintnative/fashion/FashionContext;
+	public static synthetic fun copy$default (Lio/github/constraintnative/fashion/FashionContext;DLio/github/constraintnative/fashion/Precipitation;Lio/github/constraintnative/fashion/Occasion;ILjava/lang/Object;)Lio/github/constraintnative/fashion/FashionContext;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getOccasion ()Lio/github/constraintnative/fashion/Occasion;
+	public final fun getPrecipitation ()Lio/github/constraintnative/fashion/Precipitation;
+	public final fun getTemperatureCelsius ()D
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/github/constraintnative/fashion/FashionContextRenderer : io/github/constraintnative/generative/ContextRenderer {
+	public fun <init> ()V
+	public fun renderContext (Lio/github/constraintnative/fashion/FashionContext;)Ljava/lang/String;
+	public synthetic fun renderContext (Ljava/lang/Object;)Ljava/lang/String;
+	public fun renderSolution (Lio/github/constraintnative/core/FeasibleSolution;)Ljava/lang/String;
+}
+
+public final class io/github/constraintnative/fashion/FashionSlots {
+	public static final field INSTANCE Lio/github/constraintnative/fashion/FashionSlots;
+	public final fun getBOTTOM-y6i6-oA ()Ljava/lang/String;
+	public final fun getFOOTWEAR-y6i6-oA ()Ljava/lang/String;
+	public final fun getOUTERWEAR-y6i6-oA ()Ljava/lang/String;
+	public final fun getTOP-y6i6-oA ()Ljava/lang/String;
+}
+
+public final class io/github/constraintnative/fashion/LayerScorer : io/github/constraintnative/core/SoftScorer {
+	public fun <init> ()V
+	public fun score (Lio/github/constraintnative/core/PartialAssembly;Lio/github/constraintnative/fashion/FashionContext;)Lio/github/constraintnative/core/ScoreComponent;
+	public synthetic fun score (Lio/github/constraintnative/core/PartialAssembly;Ljava/lang/Object;)Lio/github/constraintnative/core/ScoreComponent;
+}
+
+public final class io/github/constraintnative/fashion/Occasion : java/lang/Enum {
+	public static final field BUSINESS Lio/github/constraintnative/fashion/Occasion;
+	public static final field CASUAL Lio/github/constraintnative/fashion/Occasion;
+	public static final field FORMAL Lio/github/constraintnative/fashion/Occasion;
+	public static final field SPORTY Lio/github/constraintnative/fashion/Occasion;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/constraintnative/fashion/Occasion;
+	public static fun values ()[Lio/github/constraintnative/fashion/Occasion;
+}
+
+public final class io/github/constraintnative/fashion/OccasionScorer : io/github/constraintnative/core/SoftScorer {
+	public fun <init> ()V
+	public fun score (Lio/github/constraintnative/core/PartialAssembly;Lio/github/constraintnative/fashion/FashionContext;)Lio/github/constraintnative/core/ScoreComponent;
+	public synthetic fun score (Lio/github/constraintnative/core/PartialAssembly;Ljava/lang/Object;)Lio/github/constraintnative/core/ScoreComponent;
+}
+
+public final class io/github/constraintnative/fashion/Precipitation : java/lang/Enum {
+	public static final field NONE Lio/github/constraintnative/fashion/Precipitation;
+	public static final field RAIN Lio/github/constraintnative/fashion/Precipitation;
+	public static final field SNOW Lio/github/constraintnative/fashion/Precipitation;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lio/github/constraintnative/fashion/Precipitation;
+	public static fun values ()[Lio/github/constraintnative/fashion/Precipitation;
+}
+
+public final class io/github/constraintnative/fashion/TemperatureScorer : io/github/constraintnative/core/SoftScorer {
+	public fun <init> ()V
+	public fun score (Lio/github/constraintnative/core/PartialAssembly;Lio/github/constraintnative/fashion/FashionContext;)Lio/github/constraintnative/core/ScoreComponent;
+	public synthetic fun score (Lio/github/constraintnative/core/PartialAssembly;Ljava/lang/Object;)Lio/github/constraintnative/core/ScoreComponent;
+}
+
