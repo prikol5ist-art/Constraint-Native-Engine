@@ -6,7 +6,9 @@ import io.github.constraintnative.generative.*
 import io.github.constraintnative.gemini.GeminiGenerativeRanker
 import io.github.constraintnative.gemini.GeminiTransport
 import io.github.constraintnative.fashion.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 public fun main(args: Array<String>) {
     var apiKey: String? = null
@@ -157,20 +159,22 @@ public fun main(args: Array<String>) {
     val ranker = if (apiKey != null) {
         println("Initializing real GeminiGenerativeRanker via HTTP...")
         val transport = GeminiTransport { requestJson ->
-            val url = java.net.URL("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$apiKey")
-            val connection = url.openConnection() as java.net.HttpURLConnection
-            connection.requestMethod = "POST"
-            connection.doOutput = true
-            connection.setRequestProperty("Content-Type", "application/json")
-            connection.outputStream.use { os ->
-                os.write(requestJson.toByteArray(Charsets.UTF_8))
+            withContext(Dispatchers.IO) {
+                val url = java.net.URL("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$apiKey")
+                val connection = url.openConnection() as java.net.HttpURLConnection
+                connection.requestMethod = "POST"
+                connection.doOutput = true
+                connection.setRequestProperty("Content-Type", "application/json")
+                connection.outputStream.use { os ->
+                    os.write(requestJson.toByteArray(Charsets.UTF_8))
+                }
+                val status = connection.responseCode
+                if (status != 200) {
+                    val errorMsg = connection.errorStream?.bufferedReader()?.use { it.readText() }
+                    throw RuntimeException("HTTP error $status: $errorMsg")
+                }
+                connection.inputStream.bufferedReader().use { it.readText() }
             }
-            val status = connection.responseCode
-            if (status != 200) {
-                val errorMsg = connection.errorStream?.bufferedReader()?.use { it.readText() }
-                throw RuntimeException("HTTP error $status: $errorMsg")
-            }
-            connection.inputStream.bufferedReader().use { it.readText() }
         }
         GeminiGenerativeRanker(transport)
     } else {

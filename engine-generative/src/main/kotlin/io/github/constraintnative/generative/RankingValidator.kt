@@ -69,7 +69,7 @@ public object RankingValidator {
                 if (expl.length > 2000) {
                     return ValidationResult.Invalid("oversized_explanation", "Explanation for solution '${id.value}' exceeds 2000 characters")
                 }
-                if (expl.any { it.isISOControl() }) {
+                if (expl.any { it.isISOControl() && it != '\n' && it != '\r' && it != '\t' }) {
                     return ValidationResult.Invalid("invalid_explanation_characters", "Explanation for solution '${id.value}' contains control characters")
                 }
             }
