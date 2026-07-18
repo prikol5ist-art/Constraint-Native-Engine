@@ -8,6 +8,14 @@ kotlin {
 }
 
 benchmark {
+    configurations {
+        named("main") {
+            iterations = 1
+            warmups = 0
+            iterationTime = 1
+            iterationTimeUnit = "s"
+        }
+    }
     targets {
         register("main")
     }
