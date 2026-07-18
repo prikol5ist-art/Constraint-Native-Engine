@@ -15,6 +15,7 @@ dependencies {
     implementation(project(":adapter-gemini"))
     implementation(project(":domain-fashion"))
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.coroutines.core)
     
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.assertj.core)
