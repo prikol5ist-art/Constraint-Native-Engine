@@ -18,6 +18,11 @@ public final class io/github/constraintnative/solver/DeterministicSolver$SystemC
 	public fun markNow ()J
 }
 
+public final class io/github/constraintnative/solver/DiversityReranker {
+	public static final field INSTANCE Lio/github/constraintnative/solver/DiversityReranker;
+	public final fun rerank (Ljava/util/List;D)Ljava/util/List;
+}
+
 public final class io/github/constraintnative/solver/SolutionCanonicalizer {
 	public static final field INSTANCE Lio/github/constraintnative/solver/SolutionCanonicalizer;
 	public final fun canonicalize-bWmvGgA (Ljava/util/List;)Ljava/lang/String;
