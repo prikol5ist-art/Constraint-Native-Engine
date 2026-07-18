@@ -1,0 +1,274 @@
+public final class io/github/constraintnative/gemini/GeminiContent {
+	public static final field Companion Lio/github/constraintnative/gemini/GeminiContent$Companion;
+	public fun <init> (Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;)Lio/github/constraintnative/gemini/GeminiContent;
+	public static synthetic fun copy$default (Lio/github/constraintnative/gemini/GeminiContent;Ljava/util/List;ILjava/lang/Object;)Lio/github/constraintnative/gemini/GeminiContent;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getParts ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/gemini/GeminiContent$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/gemini/GeminiContent$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/constraintnative/gemini/GeminiContent;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/constraintnative/gemini/GeminiContent;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/gemini/GeminiContent$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/gemini/GeminiGenerateRequest {
+	public static final field Companion Lio/github/constraintnative/gemini/GeminiGenerateRequest$Companion;
+	public fun <init> (Ljava/util/List;Lio/github/constraintnative/gemini/GeminiGenerationConfig;)V
+	public synthetic fun <init> (Ljava/util/List;Lio/github/constraintnative/gemini/GeminiGenerationConfig;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Lio/github/constraintnative/gemini/GeminiGenerationConfig;
+	public final fun copy (Ljava/util/List;Lio/github/constraintnative/gemini/GeminiGenerationConfig;)Lio/github/constraintnative/gemini/GeminiGenerateRequest;
+	public static synthetic fun copy$default (Lio/github/constraintnative/gemini/GeminiGenerateRequest;Ljava/util/List;Lio/github/constraintnative/gemini/GeminiGenerationConfig;ILjava/lang/Object;)Lio/github/constraintnative/gemini/GeminiGenerateRequest;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContents ()Ljava/util/List;
+	public final fun getGenerationConfig ()Lio/github/constraintnative/gemini/GeminiGenerationConfig;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/gemini/GeminiGenerateRequest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/gemini/GeminiGenerateRequest$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/constraintnative/gemini/GeminiGenerateRequest;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/constraintnative/gemini/GeminiGenerateRequest;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/gemini/GeminiGenerateRequest$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/gemini/GeminiGenerateResponse {
+	public static final field Companion Lio/github/constraintnative/gemini/GeminiGenerateResponse$Companion;
+	public fun <init> (Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;)Lio/github/constraintnative/gemini/GeminiGenerateResponse;
+	public static synthetic fun copy$default (Lio/github/constraintnative/gemini/GeminiGenerateResponse;Ljava/util/List;ILjava/lang/Object;)Lio/github/constraintnative/gemini/GeminiGenerateResponse;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCandidates ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/gemini/GeminiGenerateResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/gemini/GeminiGenerateResponse$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/constraintnative/gemini/GeminiGenerateResponse;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/constraintnative/gemini/GeminiGenerateResponse;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/gemini/GeminiGenerateResponse$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/gemini/GeminiGenerationConfig {
+	public static final field Companion Lio/github/constraintnative/gemini/GeminiGenerationConfig$Companion;
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;Lio/github/constraintnative/gemini/GeminiSchema;)V
+	public synthetic fun <init> (Ljava/lang/String;Lio/github/constraintnative/gemini/GeminiSchema;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Lio/github/constraintnative/gemini/GeminiSchema;
+	public final fun copy (Ljava/lang/String;Lio/github/constraintnative/gemini/GeminiSchema;)Lio/github/constraintnative/gemini/GeminiGenerationConfig;
+	public static synthetic fun copy$default (Lio/github/constraintnative/gemini/GeminiGenerationConfig;Ljava/lang/String;Lio/github/constraintnative/gemini/GeminiSchema;ILjava/lang/Object;)Lio/github/constraintnative/gemini/GeminiGenerationConfig;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getResponseMimeType ()Ljava/lang/String;
+	public final fun getResponseSchema ()Lio/github/constraintnative/gemini/GeminiSchema;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/gemini/GeminiGenerationConfig$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/gemini/GeminiGenerationConfig$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/constraintnative/gemini/GeminiGenerationConfig;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/constraintnative/gemini/GeminiGenerationConfig;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/gemini/GeminiGenerationConfig$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/gemini/GeminiGenerativeRanker : io/github/constraintnative/generative/GenerativeRanker {
+	public fun <init> (Lio/github/constraintnative/gemini/GeminiTransport;)V
+	public fun rank (Lio/github/constraintnative/generative/RankingRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/github/constraintnative/gemini/GeminiPart {
+	public static final field Companion Lio/github/constraintnative/gemini/GeminiPart$Companion;
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lio/github/constraintnative/gemini/GeminiPart;
+	public static synthetic fun copy$default (Lio/github/constraintnative/gemini/GeminiPart;Ljava/lang/String;ILjava/lang/Object;)Lio/github/constraintnative/gemini/GeminiPart;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getText ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/gemini/GeminiPart$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/gemini/GeminiPart$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/constraintnative/gemini/GeminiPart;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/constraintnative/gemini/GeminiPart;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/gemini/GeminiPart$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/gemini/GeminiPromptFactory {
+	public static final field INSTANCE Lio/github/constraintnative/gemini/GeminiPromptFactory;
+	public final fun createPrompt (Lio/github/constraintnative/generative/RankingRequest;)Ljava/lang/String;
+}
+
+public final class io/github/constraintnative/gemini/GeminiRankedSolutionDto {
+	public static final field Companion Lio/github/constraintnative/gemini/GeminiRankedSolutionDto$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lio/github/constraintnative/gemini/GeminiRankedSolutionDto;
+	public static synthetic fun copy$default (Lio/github/constraintnative/gemini/GeminiRankedSolutionDto;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lio/github/constraintnative/gemini/GeminiRankedSolutionDto;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExplanation ()Ljava/lang/String;
+	public final fun getSolutionId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/gemini/GeminiRankedSolutionDto$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/gemini/GeminiRankedSolutionDto$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/constraintnative/gemini/GeminiRankedSolutionDto;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/constraintnative/gemini/GeminiRankedSolutionDto;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/gemini/GeminiRankedSolutionDto$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/gemini/GeminiRankingResponseDto {
+	public static final field Companion Lio/github/constraintnative/gemini/GeminiRankingResponseDto$Companion;
+	public fun <init> (Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;)Lio/github/constraintnative/gemini/GeminiRankingResponseDto;
+	public static synthetic fun copy$default (Lio/github/constraintnative/gemini/GeminiRankingResponseDto;Ljava/util/List;ILjava/lang/Object;)Lio/github/constraintnative/gemini/GeminiRankingResponseDto;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getRanked ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/gemini/GeminiRankingResponseDto$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/gemini/GeminiRankingResponseDto$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/constraintnative/gemini/GeminiRankingResponseDto;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/constraintnative/gemini/GeminiRankingResponseDto;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/gemini/GeminiRankingResponseDto$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/gemini/GeminiResponseCandidate {
+	public static final field Companion Lio/github/constraintnative/gemini/GeminiResponseCandidate$Companion;
+	public fun <init> (Lio/github/constraintnative/gemini/GeminiContent;)V
+	public final fun component1 ()Lio/github/constraintnative/gemini/GeminiContent;
+	public final fun copy (Lio/github/constraintnative/gemini/GeminiContent;)Lio/github/constraintnative/gemini/GeminiResponseCandidate;
+	public static synthetic fun copy$default (Lio/github/constraintnative/gemini/GeminiResponseCandidate;Lio/github/constraintnative/gemini/GeminiContent;ILjava/lang/Object;)Lio/github/constraintnative/gemini/GeminiResponseCandidate;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContent ()Lio/github/constraintnative/gemini/GeminiContent;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/gemini/GeminiResponseCandidate$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/gemini/GeminiResponseCandidate$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/constraintnative/gemini/GeminiResponseCandidate;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/constraintnative/gemini/GeminiResponseCandidate;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/gemini/GeminiResponseCandidate$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/gemini/GeminiSchema {
+	public static final field Companion Lio/github/constraintnative/gemini/GeminiSchema$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/util/Map;Ljava/util/List;Lio/github/constraintnative/gemini/GeminiSchema;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/Map;Ljava/util/List;Lio/github/constraintnative/gemini/GeminiSchema;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/Map;
+	public final fun component3 ()Ljava/util/List;
+	public final fun component4 ()Lio/github/constraintnative/gemini/GeminiSchema;
+	public final fun copy (Ljava/lang/String;Ljava/util/Map;Ljava/util/List;Lio/github/constraintnative/gemini/GeminiSchema;)Lio/github/constraintnative/gemini/GeminiSchema;
+	public static synthetic fun copy$default (Lio/github/constraintnative/gemini/GeminiSchema;Ljava/lang/String;Ljava/util/Map;Ljava/util/List;Lio/github/constraintnative/gemini/GeminiSchema;ILjava/lang/Object;)Lio/github/constraintnative/gemini/GeminiSchema;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getItems ()Lio/github/constraintnative/gemini/GeminiSchema;
+	public final fun getProperties ()Ljava/util/Map;
+	public final fun getRequired ()Ljava/util/List;
+	public final fun getType ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class io/github/constraintnative/gemini/GeminiSchema$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lio/github/constraintnative/gemini/GeminiSchema$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lio/github/constraintnative/gemini/GeminiSchema;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lio/github/constraintnative/gemini/GeminiSchema;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class io/github/constraintnative/gemini/GeminiSchema$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class io/github/constraintnative/gemini/GeminiTransport {
+	public abstract fun generateContent (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
