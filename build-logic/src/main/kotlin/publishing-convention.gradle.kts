@@ -1,0 +1,33 @@
+plugins {
+    `maven-publish`
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("mavenJava") {
+            pom {
+                name.set(project.name)
+                description.set("Constraint Native Engine - high-performance type-safe combinatorial optimization")
+                url.set("https://github.com/constraint-native/constraint-native-engine")
+                licenses {
+                    license {
+                        name.set("The Apache License, Version 2.0")
+                        url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("developer")
+                        name.set("Constraint Native Developers")
+                        email.set("dev@constraintnative.org")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git://github.com/constraint-native/constraint-native-engine.git")
+                    developerConnection.set("scm:git:ssh://github.com/constraint-native/constraint-native-engine.git")
+                    url.set("https://github.com/constraint-native/constraint-native-engine")
+                }
+            }
+        }
+    }
+}
