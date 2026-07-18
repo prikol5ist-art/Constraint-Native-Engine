@@ -51,7 +51,8 @@ public data class FeasibleSolution<A>(
     val id: SolutionId,
     val assignments: List<Assignment<A>>,
     val scoreComponents: List<ScoreComponent>,
-    val totalScore: Double
+    val totalScore: Double,
+    val explanation: String? = null
 )
 
 public enum class SearchTermination {
