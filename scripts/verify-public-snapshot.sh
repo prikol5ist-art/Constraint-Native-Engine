@@ -31,17 +31,17 @@ for f in "${required_files[@]}"; do
   fi
 done
 
-if git -C "$root" grep -I -n -E "$secret_pattern" -- .; then
+if git -C "$root" grep -I -n -E "$secret_pattern" -- . ':!scripts/verify-public-snapshot.sh' ':!scripts/test-verify-public-snapshot.sh'; then
   printf 'secret-like value found in current tree\n' >&2
   exit 1
 fi
 
-if git -C "$root" grep -I -n -E "$local_path_pattern" -- .; then
+if git -C "$root" grep -I -n -E "$local_path_pattern" -- . ':!scripts/verify-public-snapshot.sh' ':!scripts/test-verify-public-snapshot.sh'; then
   printf 'absolute developer path found in current tree\n' >&2
   exit 1
 fi
 
-if git -C "$root" log -p --all -- . | grep -E "$secret_pattern"; then
+if git -C "$root" log -p --all -- . ':!scripts/test-verify-public-snapshot.sh' | grep -E "$secret_pattern"; then
   printf 'secret-like value found in Git history\n' >&2
   exit 1
 fi

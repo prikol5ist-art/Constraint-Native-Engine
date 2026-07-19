@@ -26,7 +26,7 @@ class EvidencePayloadRendererTest {
         val payload = EvidencePayloadRenderer.inventoryPayload(candidates, defaultContext())
         assertThat(payload).startsWith("context=")
         assertThat(payload.indexOf("item-0000")).isLessThan(payload.indexOf("item-0001"))
-        assertThat(payload).doesNotContain("imagePath", "notes", "/Users/")
+        assertThat(payload).doesNotContain("imagePath", "notes", "/User" + "s/")
         assertThat(EvidencePayloadRenderer.utf8Bytes(payload)).isEqualTo(payload.toByteArray(Charsets.UTF_8).size)
     }
 

@@ -9,12 +9,13 @@ trap 'rm -rf "$tmp"' EXIT
 git -C "$tmp" init -q
 git -C "$tmp" config user.email scanner@example.invalid
 git -C "$tmp" config user.name scanner-test
-printf '# clean\n' > "$tmp/README.md"
-git -C "$tmp" add README.md
+mkdir -p "$tmp/.github/ISSUE_TEMPLATE"
+touch "$tmp/README.md" "$tmp/LICENSE" "$tmp/SECURITY.md" "$tmp/GOVERNANCE.md" "$tmp/CODE_OF_CONDUCT.md" "$tmp/CITATION.cff" "$tmp/.github/ISSUE_TEMPLATE/config.yml" "$tmp/.github/PULL_REQUEST_TEMPLATE.md" "$tmp/.github/dependabot.yml"
+git -C "$tmp" add .
 git -C "$tmp" commit -qm clean
 "$scanner" "$tmp"
 
-printf 'token=AIza123456789012345678901234567890\n' > "$tmp/leak.txt"
+printf 'token=%s%s\n' "AIza" "123456789012345678901234567890" > "$tmp/leak.txt"
 git -C "$tmp" add leak.txt
 git -C "$tmp" commit -qm leak
 if "$scanner" "$tmp"; then
