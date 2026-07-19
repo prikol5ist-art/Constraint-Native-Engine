@@ -12,9 +12,7 @@ application {
 }
 
 dependencies {
-    implementation(project(":adapter-gemini"))
     implementation(project(":domain-fashion"))
-    implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.coroutines.core)
     
     testImplementation(libs.junit.jupiter)
@@ -23,4 +21,5 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    systemProperty("repositoryRoot", rootProject.projectDir.absolutePath)
 }

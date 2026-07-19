@@ -16,6 +16,12 @@ public sealed interface TraceEvent {
                 singleLine.take(512)
             }
         }
+
+        private fun requireTraceText(value: String, field: String): String {
+            require(value.none { it == '\n' || it == '\r' }) { "$field must be single-line" }
+            require(value.length <= 512) { "$field must be at most 512 characters" }
+            return value
+        }
     }
 
     @Serializable
@@ -25,6 +31,7 @@ public sealed interface TraceEvent {
         val slotId: SlotId,
         val reason: String
     ) : TraceEvent {
+        init { requireTraceText(reason, "reason") }
         override val message: String = sanitizeMessage("Candidate ${candidateId.value} rejected for slot ${slotId.value}: $reason")
     }
 
@@ -34,6 +41,7 @@ public sealed interface TraceEvent {
         val slotId: SlotId,
         val reason: String
     ) : TraceEvent {
+        init { requireTraceText(reason, "reason") }
         override val message: String = sanitizeMessage("Partial assembly pruned at slot ${slotId.value}: $reason")
     }
 
@@ -51,6 +59,7 @@ public sealed interface TraceEvent {
         override val sequence: Long,
         val reason: String
     ) : TraceEvent {
+        init { requireTraceText(reason, "reason") }
         override val message: String = sanitizeMessage("Search stopped: $reason")
     }
 }

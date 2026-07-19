@@ -3,58 +3,23 @@ package io.github.constraintnative.examples.wardrobe
 import io.github.constraintnative.core.*
 import io.github.constraintnative.solver.DeterministicSolver
 import io.github.constraintnative.generative.*
-import io.github.constraintnative.gemini.GeminiGenerativeRanker
-import io.github.constraintnative.gemini.GeminiTransport
 import io.github.constraintnative.fashion.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 
 public fun main(args: Array<String>) {
-    var apiKey: String? = null
-    var occasionStr: String = "Casual"
-    var tempVal: Double = 20.0
-    var divWeight: Double = 0.0
-
-    var i = 0
-    while (i < args.size) {
-        val arg = args[i]
-        when {
-            arg.startsWith("--apiKey=") -> apiKey = arg.substringAfter("=")
-            arg == "--apiKey" && i + 1 < args.size -> {
-                apiKey = args[i + 1]
-                i++
-            }
-            arg.startsWith("--occasion=") -> occasionStr = arg.substringAfter("=")
-            arg == "--occasion" && i + 1 < args.size -> {
-                occasionStr = args[i + 1]
-                i++
-            }
-            arg.startsWith("--temperature=") -> tempVal = arg.substringAfter("=").toDoubleOrNull() ?: 20.0
-            arg == "--temperature" && i + 1 < args.size -> {
-                tempVal = args[i + 1].toDoubleOrNull() ?: 20.0
-                i++
-            }
-            arg.startsWith("--diversityWeight=") -> divWeight = arg.substringAfter("=").toDoubleOrNull() ?: 0.0
-            arg == "--diversityWeight" && i + 1 < args.size -> {
-                divWeight = args[i + 1].toDoubleOrNull() ?: 0.0
-                i++
-            }
+    val options = when (val parsed = parseCliArguments(args)) {
+        is CliParseResult.Valid -> parsed.options
+        is CliParseResult.Invalid -> {
+            System.err.println(parsed.message)
+            System.exit(2)
+            return
         }
-        i++
-    }
-
-    val occasion = when (occasionStr.lowercase()) {
-        "formal" -> Occasion.FORMAL
-        "sporty" -> Occasion.SPORTY
-        "business" -> Occasion.BUSINESS
-        else -> Occasion.CASUAL
     }
 
     val context = FashionContext(
-        temperatureCelsius = tempVal,
+        temperatureCelsius = options.temperatureCelsius,
         precipitation = Precipitation.NONE,
-        occasion = occasion
+        occasion = options.occasion
     )
 
     // Setup wardrobe candidates with explicit type arguments
@@ -145,61 +110,25 @@ public fun main(args: Array<String>) {
         softScorers = softScorers,
         desiredSolutions = 5,
         searchMode = SearchMode.EXACT,
-        searchBudget = budget,
-        seed = 42L
+        searchBudget = budget
     )
 
     println("====================================================")
     println(" Wardrobe Constraint Native Engine CLI")
-    println(" Occasion: $occasion")
-    println(" Temperature: $tempVal °C")
-    println(" Diversity Weight: $divWeight")
+    println(" Occasion: ${options.occasion}")
+    println(" Temperature: ${options.temperatureCelsius} °C")
+    println(" Diversity Weight: ${options.diversityWeight}")
     println("====================================================")
 
-    val ranker = if (apiKey != null) {
-        println("Initializing real GeminiGenerativeRanker via HTTP...")
-        val transport = GeminiTransport { requestJson ->
-            withContext(Dispatchers.IO) {
-                val url = java.net.URL("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$apiKey")
-                val connection = url.openConnection() as java.net.HttpURLConnection
-                connection.requestMethod = "POST"
-                connection.doOutput = true
-                connection.setRequestProperty("Content-Type", "application/json")
-                connection.outputStream.use { os ->
-                    os.write(requestJson.toByteArray(Charsets.UTF_8))
-                }
-                val status = connection.responseCode
-                if (status != 200) {
-                    val errorMsg = connection.errorStream?.bufferedReader()?.use { it.readText() }
-                    throw RuntimeException("HTTP error $status: $errorMsg")
-                }
-                connection.inputStream.bufferedReader().use { it.readText() }
-            }
-        }
-        GeminiGenerativeRanker(transport)
-    } else {
-        println("No --apiKey provided. Initializing dummy fallback ranker...")
-        GenerativeRanker { request ->
-            val ranked = request.solutions.mapIndexed { idx, sol ->
-                RankedSolution(
-                    id = sol.id,
-                    explanation = "Dummy explanation: outfit matches $occasion at $tempVal°C (ranked #$idx)"
-                )
-            }
-            RankingResponse(ranked)
-        }
-    }
-
     val engine = ConstraintNativeEngine(DeterministicSolver())
-    val renderer = FashionContextRenderer()
 
     val result = try {
         runBlocking {
             engine.generate(
                 request = solveRequest,
-                ranker = ranker,
-                renderer = renderer,
-                diversityWeight = divWeight
+                ranker = null,
+                renderer = null,
+                diversityWeight = options.diversityWeight
             )
         }
     } catch (e: Exception) {

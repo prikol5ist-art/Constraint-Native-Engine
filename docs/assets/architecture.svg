@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <title>Engine Architecture Flow</title>
+  <desc>Data flow from Inventory to Deterministic Solver, Feasible Solution IDs, Optional Ranker, and Validator &amp; Fallback</desc>
+  <rect width="1280" height="640" fill="#121212" rx="16"/>
+  
+  <!-- Title -->
+  <text x="80" y="80" fill="#ffffff" font-size="36" font-weight="bold">Engine Architecture Flow</text>
+  <text x="80" y="120" fill="#888888" font-size="20">Data flow from local inventory to final validated recommendation output</text>
+  
+  <!-- Flow Arrows (drawn manually to avoid url() requirement) -->
+  <!-- Arrow 1: Inventory -> Solver -->
+  <line x1="255" y1="320" x2="310" y2="320" stroke="#4caf50" stroke-width="4"/>
+  <polygon points="320,320 308,314 308,326" fill="#4caf50"/>
+
+  <!-- Arrow 2: Solver -> Feasible IDs -->
+  <line x1="495" y1="320" x2="550" y2="320" stroke="#4caf50" stroke-width="4"/>
+  <polygon points="560,320 548,314 548,326" fill="#4caf50"/>
+
+  <!-- Arrow 3: Feasible IDs -> Optional Ranker -->
+  <line x1="735" y1="320" x2="790" y2="320" stroke="#4caf50" stroke-width="4"/>
+  <polygon points="800,320 788,314 788,326" fill="#4caf50"/>
+
+  <!-- Arrow 4: Optional Ranker -> Validator & Fallback -->
+  <line x1="975" y1="320" x2="1030" y2="320" stroke="#4caf50" stroke-width="4"/>
+  <polygon points="1040,320 1028,314 1028,326" fill="#4caf50"/>
+
+  <!-- Boxes -->
+  <!-- 1. Inventory -->
+  <rect x="80" y="270" width="175" height="100" fill="#1e1e1e" stroke="#555555" stroke-width="2" rx="8"/>
+  <text x="167.5" y="327" fill="#ffffff" font-size="20" font-weight="bold" text-anchor="middle">Inventory</text>
+
+  <!-- 2. Deterministic Solver -->
+  <rect x="320" y="270" width="175" height="100" fill="#1e1e1e" stroke="#555555" stroke-width="2" rx="8"/>
+  <text x="407.5" y="315" fill="#ffffff" font-size="18" font-weight="bold" text-anchor="middle">Deterministic</text>
+  <text x="407.5" y="343" fill="#ffffff" font-size="18" font-weight="bold" text-anchor="middle">Solver</text>
+
+  <!-- 3. Feasible Solution IDs -->
+  <rect x="560" y="270" width="175" height="100" fill="#1e1e1e" stroke="#555555" stroke-width="2" rx="8"/>
+  <text x="647.5" y="315" fill="#ffffff" font-size="18" font-weight="bold" text-anchor="middle">Feasible</text>
+  <text x="647.5" y="343" fill="#ffffff" font-size="18" font-weight="bold" text-anchor="middle">Solution IDs</text>
+
+  <!-- 4. Optional Ranker -->
+  <rect x="800" y="270" width="175" height="100" fill="#1e1e1e" stroke="#555555" stroke-width="2" rx="8"/>
+  <text x="887.5" y="315" fill="#ffffff" font-size="18" font-weight="bold" text-anchor="middle">Optional</text>
+  <text x="887.5" y="343" fill="#ffffff" font-size="18" font-weight="bold" text-anchor="middle">Ranker</text>
+
+  <!-- 5. Validator & Fallback -->
+  <rect x="1040" y="270" width="175" height="100" fill="#1e1e1e" stroke="#555555" stroke-width="2" rx="8"/>
+  <text x="1127.5" y="315" fill="#ffffff" font-size="18" font-weight="bold" text-anchor="middle">Validator &amp;</text>
+  <text x="1127.5" y="343" fill="#ffffff" font-size="18" font-weight="bold" text-anchor="middle">Fallback</text>
+
+  <!-- Explanatory Subtitles -->
+  <text x="167.5" y="400" fill="#888888" font-size="14" text-anchor="middle">Raw Catalog / Closet</text>
+  <text x="407.5" y="400" fill="#888888" font-size="14" text-anchor="middle">DFS / Beam Search</text>
+  <text x="647.5" y="400" fill="#888888" font-size="14" text-anchor="middle">Filtered &amp; Reduced</text>
+  <text x="887.5" y="400" fill="#888888" font-size="14" text-anchor="middle">LLM Reranking (Gemini)</text>
+  <text x="1127.5" y="400" fill="#888888" font-size="14" text-anchor="middle">Local Safe Recovery</text>
+</svg>

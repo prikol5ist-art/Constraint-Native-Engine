@@ -36,7 +36,6 @@ class BoundedSolverTest {
             desiredSolutions = 2,
             searchMode = SearchMode.BOUNDED_BEAM,
             searchBudget = SearchBudget(1000L, 5000L, 5),
-            seed = 42L
         )
 
         val result = solver.solve(request)
@@ -61,7 +60,6 @@ class BoundedSolverTest {
             desiredSolutions = 3,
             searchMode = SearchMode.BOUNDED_BEAM,
             searchBudget = SearchBudget(2L, 5000L, 5), // very small node budget
-            seed = 42L
         )
 
         val result = solver.solve(request)
@@ -91,7 +89,6 @@ class BoundedSolverTest {
             desiredSolutions = 2,
             searchMode = SearchMode.BOUNDED_BEAM,
             searchBudget = SearchBudget(100L, 500L, 5), // max duration 500ms
-            seed = 42L
         )
 
         val result = solver.solve(request)
@@ -125,7 +122,6 @@ class BoundedSolverTest {
             desiredSolutions = 2,
             searchMode = SearchMode.BOUNDED_BEAM,
             searchBudget = SearchBudget(1000L, 5000L, 2), // beam width of 2
-            seed = 42L
         )
 
         val result = solver.solve(request)
@@ -137,5 +133,69 @@ class BoundedSolverTest {
             sol.assignments.filter { it.slot == slotTop }.map { it.candidate.id.value }
         }
         assertThat(selectedTopIds).containsExactlyInAnyOrder("top1", "top2")
+    }
+
+    @Test
+    fun `distinguishes false-infeasibility regression`() {
+        val solver = DeterministicSolver()
+        val request = SolveRequest(
+            candidates = listOf(top1, top2, bottom1),
+            slots = listOf(
+                SlotRequirement(slotTop, 1, 1),
+                SlotRequirement(slotBottom, 1, 1)
+            ),
+            context = Unit,
+            hardConstraints = listOf(
+                HardConstraint { assembly, _ ->
+                    val hasTop1 = assembly.assignments.any { it.candidate.id == top1.id }
+                    val hasBottom = assembly.assignments.any { it.slot == slotBottom }
+                    if (hasTop1 && hasBottom) {
+                        ConstraintVerdict.Violated("permit-top2-with-bottom", "top1 cannot be paired with bottom")
+                    } else {
+                        ConstraintVerdict.Satisfied
+                    }
+                }
+            ),
+            softScorers = listOf(
+                SoftScorer { assembly, _ ->
+                    val isTop1 = assembly.assignments.any { it.candidate.id == top1.id }
+                    ScoreComponent("style", if (isTop1) 10.0 else 2.0)
+                }
+            ),
+            desiredSolutions = 1,
+            searchMode = SearchMode.BOUNDED_BEAM,
+            searchBudget = SearchBudget(1000L, 5000L, 1) // beamWidth = 1
+        )
+
+        val result = solver.solve(request)
+
+        assertThat(result.solutions).isEmpty()
+        assertThat(result.termination).isEqualTo(SearchTermination.BOUNDED_SEARCH_COMPLETED)
+    }
+
+    @Test
+    fun `halts expansion after node budget exhausted during candidate loops`() {
+        val solver = DeterministicSolver()
+        val slot = SlotId("slot")
+        val candidates = (1..100).map { i ->
+            Candidate(CandidateId("c$i"), Unit, setOf(slot))
+        }
+        val request = SolveRequest(
+            candidates = candidates,
+            slots = listOf(SlotRequirement(slot, 1, 1)),
+            context = Unit,
+            hardConstraints = emptyList(),
+            softScorers = emptyList(),
+            desiredSolutions = 1,
+            searchMode = SearchMode.BOUNDED_BEAM,
+            searchBudget = SearchBudget(
+                maxExpandedNodes = 2,
+                maxDurationMillis = 5000L,
+                beamWidth = 5
+            )
+        )
+
+        val result = solver.solve(request)
+        assertThat(result.termination).isEqualTo(SearchTermination.NODE_BUDGET_EXHAUSTED)
     }
 }

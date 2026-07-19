@@ -1,0 +1,42 @@
+name: Feature Request
+description: Propose a new feature or improvement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: Thank you for suggesting a feature! Please fill out the form below.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear and concise description of what the feature is.
+      placeholder: Describe the desired feature...
+    validations:
+      required: true
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Target Slot/Constraint Use-Case
+      description: What specific slot types, constraint patterns, or solver scenarios does this target?
+      placeholder: Describe the target slot or constraint use-case...
+    validations:
+      required: true
+  - type: textarea
+    id: api_changes
+    attributes:
+      label: Proposed API Changes
+      description: What new APIs, parameters, or types would this introduce? Please provide examples if possible.
+      placeholder: |
+        // Proposed Kotlin APIs
+      render: kotlin
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: A clear and concise description of any alternative solutions or workarounds you have considered.
+      placeholder: Describe alternatives considered...
+    validations:
+      required: true

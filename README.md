@@ -1,60 +1,70 @@
-# Constraint Native Engine
+# Constraint-Native Generative Engine
 
-Constraint Native Engine is a high-performance, type-safe Kotlin multi-platform library for solving complex combinatorial optimization problems, specifically tailored for constrained recommendations like outfit assembly, product bundles, and smart planning.
+**LLMs rank feasible solution IDs. Deterministic code enforces every hard constraint.**
 
-It integrates a deterministic solver (exact Depth-First Search and Bounded Beam Search) with a LLM-based generative ranking adapter using the Gemini API.
+<!-- evidence:start -->
+**Reduce LLM ranking context by 99.45%** on the bundled 500-item / 3-solution scenario, while independent verification reports **0 hard-constraint violations** and **0 accepted unknown IDs**.
+
+[See the complete reproducible benchmark →](benchmark/reports/payload-evidence.md)
+<!-- evidence:end -->
+
+---
+
+## Quick Start (Offline Demo)
+
+Execute the offline demo CLI with the following command (requires JDK 17):
+
+```bash
+./gradlew :examples:wardrobe-cli:run --args='--occasion formal --temperature 8 --diversityWeight 0.5'
+```
+
+Expected output snippet:
+```text
+====================================================
+ Wardrobe Constraint Native Engine CLI
+ Occasion: FORMAL
+ Temperature: 8.0 °C
+ Diversity Weight: 0.5
+====================================================
+
+Search Finished with termination: EXHAUSTIVE
+Ranker status: NOT_CONFIGURED
+
+Feasible Outfits Found: 5
+```
+
+---
+
+## Guarantees
+
+This engine provides the following mathematical and execution guarantees:
+*   **Inventory Membership**: Every item included in a returned solution is guaranteed to exist in the original input candidate inventory.
+*   **Slot Eligibility**: Assigned candidates are guaranteed to match the slot definitions and satisfy the specified slot requirements.
+*   **Hard Constraints Compliance**: Every returned solution is guaranteed to satisfy all configured hard constraints. No violations can occur.
+*   **Local Fallback**: A local deterministic fallback is guaranteed to execute immediately if the optional LLM ranker times out, fails validation, or experiences network transport errors.
+*   **Zero External API Access in Core**: The core solving layer executes purely in local CPU memory without external API access, network connections, or telemetry tracking.
 
 ---
 
 ## Architecture Overview
 
-The project is structured as a Gradle multi-module build:
-- **`:engine-core`**: Core model declarations, types, inline value classes, interfaces for constraints, scorers, and Serializable trace events.
-- **`:engine-solver`**: Exact DFS and Bounded Beam Search solvers, canonicalizer, and Jaccard-based diversity reranking.
-- **`:engine-generative`**: Suspending orchestrator coordinating local constraints and remote LLM ranking with strict validation.
-- **`:adapter-gemini`**: Strictly-typed JSON adapter mapping request schemas to the Gemini API contents model.
-- **`:domain-fashion`**: A reusable domain layer demonstrating wardrobe matching with temperature, occasion, layering, and color harmony soft scorers.
-- **`:benchmark`**: JMH benchmarks validating solver speed and node expansion metrics.
-- **`:examples:wardrobe-cli`**: A runnable CLI exemplifying wardrobe solving and generative ranking.
+The codebase is organized into modular JVM layers to enforce strict trust boundaries:
+
+![Engine Architecture Flow](docs/assets/architecture.svg)
+
+*   [`:engine-core`](engine-core): Contains type definitions and modeling interfaces.
+*   [`:engine-solver`](engine-solver): Core exact backtracking search and level-by-level beam search solvers.
+*   [`:engine-generative`](engine-generative): Orchestrator for local deterministic solving, validation, and remote ranking delegation.
+*   [`:adapter-gemini`](adapter-gemini): Optional JSON adapter for the Gemini API.
+*   [`:domain-fashion`](domain-fashion): Example implementation of wardrobe assembly with clothes matching rules.
+
+For more details on modular security boundaries, see the [Architecture Documentation](docs/architecture.md).
 
 ---
 
-## Core Concepts
+## Code Examples (Kotlin Usage)
 
-### 1. Constraint Modeling
-Combinatorial spaces are modeled by specifying:
-- **`SlotRequirement`**: The target slots to be filled, with minimum and maximum item counts.
-- **`Candidate`**: Available inventory items, tagged with eligible slots and domain metadata (`A`).
-- **`HardConstraint`**: Predicates that discard invalid solutions early during the tree traversal.
-- **`SoftScorer`**: Weighting functions assigning provisional scores to partial/complete states.
-
-### 2. Search Mode Selection
-The engine offers two search modes:
-- **`SearchMode.EXACT`**: A backtracking branch-and-bound algorithm exploring the entire search space. It guarantees the absolute global optimum but scales exponentially.
-- **`SearchMode.BOUNDED_BEAM`**: A level-by-level breadth-first beam search. At each level, it expands candidate successors, scores them, and retains only the top `beamWidth` states. Extremely scalable, but may skip global optima depending on beam width.
-
-### 3. Diversity Reranking
-Reranking balances candidate score quality against novelty using a greedy optimization function:
-\[
-\text{metric} = \text{normalizedQuality} - \text{diversityWeight} \times \max_{S_j \in \text{Selected}} \text{JaccardSimilarity}(S_i, S_j)
-\]
-Where Jaccard similarity is computed over the set of candidate IDs present in the outfits.
-
-### 4. Generative Reranking & Validation
-To add subjective intelligence, the engine supports external LLM rankers (`GenerativeRanker`). To prevent issues like hallucinated IDs, truncation, or prompt injection:
-- Input summaries are serialized and isolated as escaped JSON payloads.
-- The ranker output is validated strictly using `RankingValidator`:
-  - Rejects unknown or duplicate solution IDs.
-  - Rejects oversized explanations (> 2000 chars) or control characters.
-  - Resolves subset rankings by deterministically appending omitted solutions in their local score order.
-
----
-
-## Code Examples
-
-### 1. Library Setup & Basic Solve
-
-Here is how to set up the candidates, slots, constraints, and run the exact solver:
+### 1. Solver Initialization & Execution
 
 ```kotlin
 import io.github.constraintnative.core.*
@@ -88,14 +98,13 @@ val request = SolveRequest(
     softScorers = emptyList(),
     desiredSolutions = 3,
     searchMode = SearchMode.EXACT,
-    searchBudget = SearchBudget(maxExpandedNodes = 1000L, maxDurationMillis = 5000L, beamWidth = 10),
-    seed = 42L
+    searchBudget = SearchBudget(maxExpandedNodes = 1000L, maxDurationMillis = 5000L, beamWidth = 10)
 )
 
 val result = solver.solve(request)
 result.solutions.forEach { solution ->
-    println("Solution ${solution.id.value}:")
-    solution.assignments.forEach { println("  ${it.slot.value} = ${it.candidate.id.value}") }
+    println("Solution \${solution.id.value}:")
+    solution.assignments.forEach { println("  \${it.slot.value} = \${it.candidate.id.value}") }
 }
 ```
 
@@ -117,7 +126,6 @@ class SpecificMatchConstraint(
             return ConstraintVerdict.Undetermined
         }
         
-        // Example logic: IDs must have matching suffixes
         return if (valA.takeLast(2) == valB.takeLast(2)) {
             ConstraintVerdict.Satisfied
         } else {
@@ -129,19 +137,39 @@ class SpecificMatchConstraint(
 
 ---
 
+## Optional Gemini Adapter (Generative Ranking)
+
+For subjective and AI-assisted outfit selection, you can wrap the deterministic solver with the `GenerativeRanker` interface via the `:adapter-gemini` module.
+
+The system translates the top deterministic candidate solutions into highly reduced ID-only arrays to run generative ranking. This mapping ensures that the LLM only observes valid options, keeping context size small and eliminating the threat of LLM hallucinations. The input contexts are formatted into escaped JSON structures.
+
+See [Generative Ranking & Validation](docs/generative-ranking.md) for more details.
+
+---
+
 ## Building and Running Benchmarks
 
-1. **Build and Test All Modules**:
-   ```bash
-   ./gradlew test apiCheck
-   ```
+We verify our performance claims using structured gradle tasks and microbenchmarks.
 
-2. **Run Wardrobe CLI (examples/wardrobe-cli)**:
-   ```bash
-   ./gradlew :examples:wardrobe-cli:run --args="--occasion=Formal --temperature=12.0 --diversityWeight=0.5"
-   ```
+*   To run the test suite and verify evidence:
+    ```bash
+    ./gradlew :benchmark:verifyEvidence :benchmark:test dokkaHtmlMultiModule
+    ```
+*   To review the reproducible payload size report, see [Payload Evidence Report](benchmark/reports/payload-evidence.md).
+*   For documentation on testing assumptions and metrics, see [Benchmark Methodology](docs/benchmark-methodology.md).
 
-3. **Run JMH Performance Benchmarks**:
-   ```bash
-   ./gradlew :benchmark:mainBenchmark
-   ```
+---
+
+## Alpha Maturity
+
+This library is currently in **Alpha maturity**. The API surface is subject to breaking changes.
+*   **Current Limitations**: The search engines run on a single thread per request; large combinatorial state trees should utilize the `SearchMode.BOUNDED_BEAM` search to restrict CPU overhead.
+*   **Stability**: Backward compatibility guarantees do not apply until the 1.0.0 release.
+
+---
+
+## Contribution, Security, and License
+
+*   **Contributions**: We welcome bug reports and code updates. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for style rules.
+*   **Security**: Please report security vulnerabilities or threat model reviews according to the guidelines in [docs/privacy-and-threat-model.md](docs/privacy-and-threat-model.md).
+*   **License**: This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE) for full details.

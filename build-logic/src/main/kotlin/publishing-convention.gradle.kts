@@ -1,10 +1,25 @@
+import org.gradle.api.tasks.bundling.Jar
+
 plugins {
     `maven-publish`
+    `java`
+}
+
+java {
+    withSourcesJar()
+}
+
+val dokkaJavadocJar = tasks.register<Jar>("dokkaJavadocJar") {
+    dependsOn(tasks.named("dokkaJavadoc"))
+    archiveClassifier.set("javadoc")
+    from(layout.buildDirectory.dir("dokka/javadoc"))
 }
 
 publishing {
     publications {
         register<MavenPublication>("mavenJava") {
+            from(components["java"])
+            artifact(dokkaJavadocJar)
             pom {
                 name.set(project.name)
                 description.set("Constraint Native Engine - high-performance type-safe combinatorial optimization")

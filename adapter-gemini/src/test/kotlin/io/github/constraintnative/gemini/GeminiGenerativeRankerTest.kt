@@ -111,4 +111,69 @@ class GeminiGenerativeRankerTest {
             assertThat(e.message).isEqualTo("Cancelled")
         }
     }
+
+    @Test
+    fun `should parse successful response with additional real Gemini envelope fields`() = runTest {
+        val mockTransport = GeminiTransport {
+            """
+            {
+              "candidates": [{
+                "content": {"role":"model","parts":[{"text":"{\"ranked\":[{\"solution_id\":\"sol1\",\"explanation\":\"Good\"}]}"}]},
+                "finishReason": "STOP",
+                "index": 0
+              }],
+              "modelVersion": "gemini-1.5-flash",
+              "usageMetadata": {"promptTokenCount": 12}
+            }
+            """.trimIndent()
+        }
+
+        val ranker = GeminiGenerativeRanker(mockTransport)
+        val response = ranker.rank(rankRequest)
+
+        assertThat(response.rankedSolutions).hasSize(1)
+        assertThat(response.rankedSolutions[0].id.value).isEqualTo("sol1")
+        assertThat(response.rankedSolutions[0].explanation).isEqualTo("Good")
+    }
+
+    @Test
+    fun `should reject oversized transport response`() = runTest {
+        val oversizedResponse = "x".repeat(256 * 1024 + 1)
+        val mockTransport = GeminiTransport { oversizedResponse }
+        val ranker = GeminiGenerativeRanker(mockTransport)
+
+        var thrown: Throwable? = null
+        try {
+            ranker.rank(rankRequest)
+        } catch (t: Throwable) {
+            thrown = t
+        }
+        assertThat(thrown).isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("Gemini transport response exceeds")
+    }
+
+    @Test
+    fun `should reject oversized extracted candidate text`() = runTest {
+        val oversizedCandidateText = "{\"ranked\":[], \"dummy\":\"" + "x".repeat(64 * 1024 + 1) + "\"}"
+        val escapedCandidateText = oversizedCandidateText.replace("\"", "\\\"")
+        val mockTransport = GeminiTransport {
+            """
+            {
+              "candidates": [{
+                "content": {"parts":[{"text":"$escapedCandidateText"}]}
+              }]
+            }
+            """.trimIndent()
+        }
+        val ranker = GeminiGenerativeRanker(mockTransport)
+
+        var thrown: Throwable? = null
+        try {
+            ranker.rank(rankRequest)
+        } catch (t: Throwable) {
+            thrown = t
+        }
+        assertThat(thrown).isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("Gemini ranking JSON exceeds")
+    }
 }

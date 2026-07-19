@@ -47,18 +47,20 @@ class SolutionCanonicalizerTest {
             Assignment(slotB, cand2)
         )
         val solutionId = SolutionCanonicalizer.canonicalize(assignments)
+        assertThat(solutionId.value).isEqualTo("19a09098df7d4aab67ffd85b65f08cf2")
+    }
 
-        // We will pin the exact expected 32-character hexadecimal string
-        // corresponding to SHA-256 of "slotA=cand1\nslotB=cand2\n" truncated to 16 bytes.
-        // Input string: "slotA=cand1\nslotB=cand2\n"
-        // Let's verify the first 16 bytes of its SHA-256 hash.
-        // SHA-256 of "slotA=cand1\nslotB=cand2\n" is:
-        // Let's run the test and check the printed value, or we can compute it.
-        // Pinned value will be verified below.
-        assertThat(solutionId.value).hasSize(32)
-        
-        // Let's print or verify the exact hash.
-        val expectedHex = "eaf843e6b864160a09c2ac19275efd42" // Pinned SHA-256 digest of "slotA=cand1\nslotB=cand2\n"
-        assertThat(solutionId.value).isEqualTo(expectedHex)
+
+    @Test
+    fun `distinguishes legal IDs that collide in delimiter encoding`() {
+        val firstSlot = SlotId("a")
+        val firstCandidate = Candidate(CandidateId("b=c"), "first", setOf(firstSlot))
+        val secondSlot = SlotId("a=b")
+        val secondCandidate = Candidate(CandidateId("c"), "second", setOf(secondSlot))
+
+        val first = SolutionCanonicalizer.canonicalize(listOf(Assignment(firstSlot, firstCandidate)))
+        val second = SolutionCanonicalizer.canonicalize(listOf(Assignment(secondSlot, secondCandidate)))
+
+        assertThat(first).isNotEqualTo(second)
     }
 }

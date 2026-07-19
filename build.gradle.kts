@@ -35,3 +35,35 @@ subprojects {
 tasks.named<org.jetbrains.dokka.gradle.DokkaMultiModuleTask>("dokkaHtmlMultiModule") {
     outputDirectory.set(layout.buildDirectory.dir("dokka/html"))
 }
+
+dependencies {
+    kover(project(":engine-core"))
+    kover(project(":engine-solver"))
+    kover(project(":engine-generative"))
+    kover(project(":adapter-gemini"))
+    kover(project(":domain-fashion"))
+}
+
+kover {
+    reports {
+        verify {
+            rule("aggregate library line coverage") {
+                minBound(
+                    85,
+                    kotlinx.kover.gradle.plugin.dsl.CoverageUnit.LINE,
+                    kotlinx.kover.gradle.plugin.dsl.AggregationType.COVERED_PERCENTAGE
+                )
+            }
+        }
+    }
+}
+
+tasks.named("koverVerify") {
+    dependsOn(
+        ":engine-core:koverVerify",
+        ":engine-solver:koverVerify",
+        ":engine-generative:koverVerify",
+        ":adapter-gemini:koverVerify",
+        ":domain-fashion:koverVerify"
+    )
+}

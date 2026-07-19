@@ -64,8 +64,7 @@ class RandomizedSolverVerificationTest {
                 softScorers = softScorers,
                 desiredSolutions = 100,
                 searchMode = SearchMode.EXACT,
-                searchBudget = budget,
-                seed = run.toLong()
+                searchBudget = budget
             )
 
             val beamRequest = exactRequest.copy(
@@ -77,21 +76,47 @@ class RandomizedSolverVerificationTest {
             val exactResult = solver.solve(exactRequest)
             val beamResult = solver.solve(beamRequest)
 
+            // Independently enumerate all valid solutions:
+            val allPossibleSolutions = mutableListOf<List<Assignment<Unit>>>()
+            for (c0 in candidates) {
+                if (slots[0] in c0.eligibleSlots) {
+                    for (c1 in candidates) {
+                        if (c1.id != c0.id && slots[1] in c1.eligibleSlots) {
+                            val assignments = listOf(Assignment(slots[0], c0), Assignment(slots[1], c1))
+                            val partialAssembly = PartialAssembly(assignments, complete = true)
+                            val satisfiesHard = hardConstraints.all { constraint ->
+                                constraint.evaluate(partialAssembly, Unit) !is ConstraintVerdict.Violated
+                            }
+                            if (satisfiesHard) {
+                                allPossibleSolutions.add(assignments)
+                            }
+                        }
+                    }
+                }
+            }
+
+            val expectedSolutions = allPossibleSolutions.map { assignments ->
+                val partialAssembly = PartialAssembly(assignments, complete = true)
+                val scoreComponents = softScorers.map { it.score(partialAssembly, Unit) }
+                val totalScore = scoreComponents.sumOf { it.value }
+                val id = SolutionCanonicalizer.canonicalize(assignments)
+                FeasibleSolution(id, assignments, scoreComponents, totalScore)
+            }.distinctBy { it.id }.sortedWith(
+                compareByDescending<FeasibleSolution<Unit>> { it.totalScore }
+                    .thenBy { it.id.value }
+            )
+
+            // Assert exact search finds exactly the expected solutions in the correct order
+            assertThat(exactResult.solutions).isEqualTo(expectedSolutions)
+
             if (beamResult.solutions.isNotEmpty()) {
-                // 1. Exact search must not be empty if beam search found solutions
+                // Exact search must not be empty if beam search found solutions
                 assertThat(exactResult.solutions).isNotEmpty
 
-                // 2. Exact best score must be >= beam best score
+                // Exact best score must be >= beam best score
                 val exactBestScore = exactResult.solutions.first().totalScore
                 val beamBestScore = beamResult.solutions.first().totalScore
                 assertThat(exactBestScore).isGreaterThanOrEqualTo(beamBestScore - 1e-9)
-
-                // 3. Every solution found by beam search must be found by exact search
-                val exactSolutionIds = exactResult.solutions.map { it.id }.toSet()
-                for (beamSol in beamResult.solutions) {
-                    assertThat(beamSol.id).`as`("Beam solution ID must exist in exact solutions on run $run")
-                        .isIn(exactSolutionIds)
-                }
             }
         }
     }

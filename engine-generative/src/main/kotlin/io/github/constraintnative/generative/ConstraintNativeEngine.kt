@@ -17,6 +17,10 @@ public class ConstraintNativeEngine(
         rankerTimeoutMillis: Long = 5000L,
         diversityWeight: Double = 0.0
     ): EngineResult<A> {
+        require(rankerTimeoutMillis > 0) { "rankerTimeoutMillis must be positive" }
+        require(diversityWeight.isFinite() && diversityWeight in 0.0..1.0) {
+            "diversityWeight must be finite and in 0.0..1.0"
+        }
         val solveResult = solver.solve(request)
         if (solveResult.solutions.isEmpty()) {
             return EngineResult(
@@ -59,12 +63,12 @@ public class ConstraintNativeEngine(
             )
         } catch (e: CancellationException) {
             throw e
-        } catch (t: Throwable) {
+        } catch (e: Exception) {
             return EngineResult(
                 solutions = localSolutions,
                 termination = solveResult.termination,
                 rankerStatus = RankerStatus.FELL_BACK,
-                rankerError = t.message ?: t.toString()
+                rankerError = sanitizeRankerError(e.message ?: e.toString())
             )
         }
 
@@ -92,4 +96,7 @@ public class ConstraintNativeEngine(
             rankerStatus = RankerStatus.APPLIED
         )
     }
+
+    private fun sanitizeRankerError(value: String): String =
+        value.replace('\r', ' ').replace('\n', ' ').take(512)
 }

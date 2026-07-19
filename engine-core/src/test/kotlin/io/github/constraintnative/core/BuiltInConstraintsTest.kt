@@ -184,4 +184,88 @@ class BuiltInConstraintsTest {
         assertThat(constraint.evaluate(assemblyInvalid, ""))
             .isInstanceOf(ConstraintVerdict.Violated::class.java)
     }
+
+    @Test
+    fun `AttributePredicateConstraint rejects any invalid assignment in its slot`() {
+        val second = Candidate(CandidateId("c4"), "wrong", setOf(slotA))
+        val constraint = AttributePredicateConstraint<String, String>(slotA, "attr_check") { attr, context ->
+            attr == context
+        }
+        val assembly = PartialAssembly(
+            listOf(Assignment(slotA, cand1), Assignment(slotA, second)),
+            complete = true
+        )
+
+        assertThat(constraint.evaluate(assembly, "attr1"))
+            .isInstanceOf(ConstraintVerdict.Violated::class.java)
+    }
+
+    @Test
+    fun `AttributePredicateConstraint edge cases`() {
+        val constraint = AttributePredicateConstraint<String, String>(slotA, "code") { a, c -> true }
+        // Empty and complete
+        val emptyComplete = PartialAssembly<String>(emptyList(), complete = true)
+        assertThat(constraint.evaluate(emptyComplete, ""))
+            .isEqualTo(ConstraintVerdict.Satisfied)
+    }
+
+    @Test
+    fun `RequiredTogetherConstraint edge cases`() {
+        val constraint = RequiredTogetherConstraint<String, String>(
+            first = CandidateId("c1"),
+            second = CandidateId("c2")
+        )
+        // Neither present, incomplete
+        val noneIncomplete = PartialAssembly<String>(emptyList(), complete = false)
+        assertThat(constraint.evaluate(noneIncomplete, ""))
+            .isEqualTo(ConstraintVerdict.Undetermined)
+
+        // Neither present, complete
+        val noneComplete = PartialAssembly<String>(emptyList(), complete = true)
+        assertThat(constraint.evaluate(noneComplete, ""))
+            .isEqualTo(ConstraintVerdict.Satisfied)
+    }
+
+    @Test
+    fun `AtomicGroupConstraint group member not selected for active slots`() {
+        val groupId = GroupId("g1")
+        val gc1 = Candidate(CandidateId("c1"), "attr1", setOf(slotA), groupId)
+        val gc2 = Candidate(CandidateId("c2"), "attr2", setOf(slotB), groupId)
+
+        val constraint = AtomicGroupConstraint<String, String>(
+            groupId = groupId,
+            groupCandidates = setOf(gc1, gc2)
+        )
+
+        // Slot B is in activeSlots (it's assigned to cand2). gc2 is not selected.
+        // This violates because member gc2 was not selected for active slots.
+        val completeWithoutGc2 = PartialAssembly(
+            listOf(Assignment(slotA, gc1), Assignment(slotB, cand2)),
+            complete = true
+        )
+        assertThat(constraint.evaluate(completeWithoutGc2, ""))
+            .isInstanceOf(ConstraintVerdict.Violated::class.java)
+    }
+
+    @Test
+    fun `AllowedCombinationConstraint edge cases`() {
+        val constraint = AllowedCombinationConstraint<String, String>(
+            allowedCombinations = listOf(
+                setOf(CandidateId("c1"), CandidateId("c2"))
+            )
+        )
+
+        // Empty and complete
+        val emptyComplete = PartialAssembly<String>(emptyList(), complete = true)
+        assertThat(constraint.evaluate(emptyComplete, ""))
+            .isEqualTo(ConstraintVerdict.Satisfied)
+
+        // Complete but exact match fails (e.g. only c1 selected but complete is true)
+        val onlyC1Complete = PartialAssembly(
+            listOf(Assignment(slotA, cand1)),
+            complete = true
+        )
+        assertThat(constraint.evaluate(onlyC1Complete, ""))
+            .isInstanceOf(ConstraintVerdict.Violated::class.java)
+    }
 }

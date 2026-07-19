@@ -6,14 +6,17 @@ public class AttributePredicateConstraint<A, C>(
     public val predicate: (A, C) -> Boolean
 ) : HardConstraint<A, C> {
     override fun evaluate(assembly: PartialAssembly<A>, context: C): ConstraintVerdict {
-        val assignment = assembly.assignments.find { it.slot == slot }
-            ?: return ConstraintVerdict.Undetermined
-        return if (predicate(assignment.candidate.attributes, context)) {
+        val assignments = assembly.assignments.filter { it.slot == slot }
+        if (assignments.isEmpty()) {
+            return if (assembly.complete) ConstraintVerdict.Satisfied else ConstraintVerdict.Undetermined
+        }
+        val invalid = assignments.firstOrNull { !predicate(it.candidate.attributes, context) }
+        return if (invalid == null) {
             ConstraintVerdict.Satisfied
         } else {
             ConstraintVerdict.Violated(
                 code,
-                "Candidate ${assignment.candidate.id.value} does not satisfy attribute predicate for slot ${slot.value}"
+                "Candidate ${invalid.candidate.id.value} does not satisfy attribute predicate for slot ${slot.value}"
             )
         }
     }

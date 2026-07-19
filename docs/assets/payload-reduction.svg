@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <title>Payload Size Comparison</title>
+  <desc>Comparison of Inventory-First payload vs Constraint-Native payload</desc>
+  <rect width="1280" height="640" fill="#121212" rx="16"/>
+  
+  <!-- Title -->
+  <text x="80" y="80" fill="#ffffff" font-size="36" font-weight="bold">Payload Size Comparison</text>
+  <text x="80" y="120" fill="#888888" font-size="20">Comparison of Inventory-First payload vs Constraint-Native payload</text>
+  
+  <!-- Bar 1 (Baseline) -->
+  <text x="80" y="200" fill="#aaaaaa" font-size="22" font-weight="bold">Inventory-first payload</text>
+  <rect x="80" y="220" width="800" height="60" fill="#555555" rx="8"/>
+  <text x="900" y="258" fill="#ffffff" font-size="24" font-weight="bold">73593 bytes</text>
+  
+  <!-- Bar 2 (Constrained) -->
+  <text x="80" y="340" fill="#aaaaaa" font-size="22" font-weight="bold">Constraint-native payload</text>
+  <rect x="80" y="360" width="4" height="60" fill="#4caf50" rx="8"/>
+  <text x="900" y="398" fill="#ffffff" font-size="24" font-weight="bold">405 bytes</text>
+  
+  <!-- Reduction Badge -->
+  <text x="80" y="520" fill="#4caf50" font-size="48" font-weight="bold">99.45% reduction</text>
+  <text x="80" y="560" fill="#888888" font-size="20">Payload size reduced by local constraint solving and filtering</text>
+</svg>

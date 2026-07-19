@@ -7,3 +7,23 @@ build/
 *.iws
 out/
 .DS_Store
+
+# Local plans and agent execution state
+/2026-*-constraint-native-*.md
+/IMPLEMENTATION_PLAN.md
+/docs/superpowers/
+/artifacts/
+
+# Local configuration and secrets
+local.properties
+*.local.properties
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+
+# Generated evidence timing and temporary output
+/benchmark/build/
+/benchmark/reports/local-*.json
+/docs/assets/*.tmp.svg

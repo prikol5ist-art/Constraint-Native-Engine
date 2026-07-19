@@ -4,38 +4,80 @@ public final class io/github/constraintnative/fashion/ColorHarmonyScorer : io/gi
 	public synthetic fun score (Lio/github/constraintnative/core/PartialAssembly;Ljava/lang/Object;)Lio/github/constraintnative/core/ScoreComponent;
 }
 
+public final class io/github/constraintnative/fashion/FashionAvailabilityConstraint : io/github/constraintnative/core/HardConstraint {
+	public fun <init> ()V
+	public fun evaluate (Lio/github/constraintnative/core/PartialAssembly;Lio/github/constraintnative/fashion/FashionContext;)Lio/github/constraintnative/core/ConstraintVerdict;
+	public synthetic fun evaluate (Lio/github/constraintnative/core/PartialAssembly;Ljava/lang/Object;)Lio/github/constraintnative/core/ConstraintVerdict;
+}
+
 public final class io/github/constraintnative/fashion/FashionCandidate {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ID)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IDLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/Map;ZZLjava/lang/Long;IZLjava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IDLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/Map;ZZLjava/lang/Long;IZLjava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
+	public final fun component10 ()Ljava/lang/Integer;
+	public final fun component11 ()Ljava/lang/Integer;
+	public final fun component12 ()Ljava/util/Map;
+	public final fun component13 ()Z
+	public final fun component14 ()Z
+	public final fun component15 ()Ljava/lang/Long;
+	public final fun component16 ()I
+	public final fun component17 ()Z
+	public final fun component18 ()Ljava/lang/String;
 	public final fun component2 ()Ljava/lang/String;
 	public final fun component3 ()Ljava/lang/String;
 	public final fun component4 ()Ljava/lang/String;
 	public final fun component5 ()I
 	public final fun component6 ()D
-	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ID)Lio/github/constraintnative/fashion/FashionCandidate;
-	public static synthetic fun copy$default (Lio/github/constraintnative/fashion/FashionCandidate;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IDILjava/lang/Object;)Lio/github/constraintnative/fashion/FashionCandidate;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun component9 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IDLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/Map;ZZLjava/lang/Long;IZLjava/lang/String;)Lio/github/constraintnative/fashion/FashionCandidate;
+	public static synthetic fun copy$default (Lio/github/constraintnative/fashion/FashionCandidate;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IDLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/Map;ZZLjava/lang/Long;IZLjava/lang/String;ILjava/lang/Object;)Lio/github/constraintnative/fashion/FashionCandidate;
 	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAvailable ()Z
+	public final fun getBreathability ()Ljava/lang/Integer;
+	public final fun getCategory ()Ljava/lang/String;
 	public final fun getColor ()Ljava/lang/String;
+	public final fun getFavorite ()Z
 	public final fun getFormalness ()D
 	public final fun getId ()Ljava/lang/String;
+	public final fun getInLaundry ()Z
+	public final fun getLastWornAtEpochMillis ()Ljava/lang/Long;
 	public final fun getLayer ()I
+	public final fun getLockedGroupId ()Ljava/lang/String;
+	public final fun getMaterial ()Ljava/lang/String;
 	public final fun getName ()Ljava/lang/String;
+	public final fun getSilhouette ()Ljava/lang/String;
+	public final fun getStyleScores ()Ljava/util/Map;
 	public final fun getType ()Ljava/lang/String;
+	public final fun getWarmth ()Ljava/lang/Integer;
+	public final fun getWearCount ()I
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
 public final class io/github/constraintnative/fashion/FashionContext {
-	public fun <init> (DLio/github/constraintnative/fashion/Precipitation;Lio/github/constraintnative/fashion/Occasion;)V
+	public fun <init> (DLio/github/constraintnative/fashion/Precipitation;Lio/github/constraintnative/fashion/Occasion;DLkotlin/ranges/ClosedFloatingPointRange;Ljava/util/Set;Ljava/util/Set;J)V
+	public synthetic fun <init> (DLio/github/constraintnative/fashion/Precipitation;Lio/github/constraintnative/fashion/Occasion;DLkotlin/ranges/ClosedFloatingPointRange;Ljava/util/Set;Ljava/util/Set;JILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()D
 	public final fun component2 ()Lio/github/constraintnative/fashion/Precipitation;
 	public final fun component3 ()Lio/github/constraintnative/fashion/Occasion;
-	public final fun copy (DLio/github/constraintnative/fashion/Precipitation;Lio/github/constraintnative/fashion/Occasion;)Lio/github/constraintnative/fashion/FashionContext;
-	public static synthetic fun copy$default (Lio/github/constraintnative/fashion/FashionContext;DLio/github/constraintnative/fashion/Precipitation;Lio/github/constraintnative/fashion/Occasion;ILjava/lang/Object;)Lio/github/constraintnative/fashion/FashionContext;
+	public final fun component4 ()D
+	public final fun component5 ()Lkotlin/ranges/ClosedFloatingPointRange;
+	public final fun component6 ()Ljava/util/Set;
+	public final fun component7 ()Ljava/util/Set;
+	public final fun component8 ()J
+	public final fun copy (DLio/github/constraintnative/fashion/Precipitation;Lio/github/constraintnative/fashion/Occasion;DLkotlin/ranges/ClosedFloatingPointRange;Ljava/util/Set;Ljava/util/Set;J)Lio/github/constraintnative/fashion/FashionContext;
+	public static synthetic fun copy$default (Lio/github/constraintnative/fashion/FashionContext;DLio/github/constraintnative/fashion/Precipitation;Lio/github/constraintnative/fashion/Occasion;DLkotlin/ranges/ClosedFloatingPointRange;Ljava/util/Set;Ljava/util/Set;JILjava/lang/Object;)Lio/github/constraintnative/fashion/FashionContext;
 	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAvoidedColors ()Ljava/util/Set;
+	public final fun getCurrentTimeEpochMillis ()J
 	public final fun getOccasion ()Lio/github/constraintnative/fashion/Occasion;
 	public final fun getPrecipitation ()Lio/github/constraintnative/fashion/Precipitation;
+	public final fun getPreferredStyleClusters ()Ljava/util/Set;
+	public final fun getTargetFormalness ()Lkotlin/ranges/ClosedFloatingPointRange;
 	public final fun getTemperatureCelsius ()D
+	public final fun getWindMetersPerSecond ()D
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
@@ -47,12 +89,41 @@ public final class io/github/constraintnative/fashion/FashionContextRenderer : i
 	public fun renderSolution (Lio/github/constraintnative/core/FeasibleSolution;)Ljava/lang/String;
 }
 
+public final class io/github/constraintnative/fashion/FashionSlotRequirement {
+	public synthetic fun <init> (Ljava/lang/String;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-y6i6-oA ()Ljava/lang/String;
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun copy-xUdPvRE (Ljava/lang/String;II)Lio/github/constraintnative/fashion/FashionSlotRequirement;
+	public static synthetic fun copy-xUdPvRE$default (Lio/github/constraintnative/fashion/FashionSlotRequirement;Ljava/lang/String;IIILjava/lang/Object;)Lio/github/constraintnative/fashion/FashionSlotRequirement;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMax ()I
+	public final fun getMin ()I
+	public final fun getSlot-y6i6-oA ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public final class io/github/constraintnative/fashion/FashionSlots {
 	public static final field INSTANCE Lio/github/constraintnative/fashion/FashionSlots;
+	public final fun getACCESSORY-y6i6-oA ()Ljava/lang/String;
 	public final fun getBOTTOM-y6i6-oA ()Ljava/lang/String;
 	public final fun getFOOTWEAR-y6i6-oA ()Ljava/lang/String;
+	public final fun getFULL_BODY-y6i6-oA ()Ljava/lang/String;
 	public final fun getOUTERWEAR-y6i6-oA ()Ljava/lang/String;
 	public final fun getTOP-y6i6-oA ()Ljava/lang/String;
+}
+
+public final class io/github/constraintnative/fashion/FashionTemplates {
+	public static final field INSTANCE Lio/github/constraintnative/fashion/FashionTemplates;
+	public final fun getDRESS ()Ljava/util/List;
+	public final fun getSEPARATES ()Ljava/util/List;
+}
+
+public final class io/github/constraintnative/fashion/FashionWeatherConstraint : io/github/constraintnative/core/HardConstraint {
+	public fun <init> ()V
+	public fun evaluate (Lio/github/constraintnative/core/PartialAssembly;Lio/github/constraintnative/fashion/FashionContext;)Lio/github/constraintnative/core/ConstraintVerdict;
+	public synthetic fun evaluate (Lio/github/constraintnative/core/PartialAssembly;Ljava/lang/Object;)Lio/github/constraintnative/core/ConstraintVerdict;
 }
 
 public final class io/github/constraintnative/fashion/LayerScorer : io/github/constraintnative/core/SoftScorer {

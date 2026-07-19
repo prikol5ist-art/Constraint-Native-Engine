@@ -6,6 +6,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import kotlin.coroutines.cancellation.CancellationException
 
@@ -36,8 +37,7 @@ class ConstraintNativeEngineTest {
         softScorers = emptyList(),
         desiredSolutions = 2,
         searchMode = SearchMode.EXACT,
-        searchBudget = defaultBudget,
-        seed = 42L
+        searchBudget = defaultBudget
     )
 
     private val testRenderer = object : ContextRenderer<String, String> {
@@ -162,5 +162,48 @@ class ConstraintNativeEngineTest {
         assertThat(result.solutions).isEmpty()
         assertThat(rankerCalled).isFalse()
         assertThat(result.rankerStatus).isEqualTo(RankerStatus.NOT_CONFIGURED)
+    }
+
+    @Test
+    fun `generate throws IllegalArgumentException for non-positive timeout`() = runTest {
+        val engine = ConstraintNativeEngine(DeterministicSolver())
+        var thrown: Throwable? = null
+        try {
+            engine.generate(solveRequest, rankerTimeoutMillis = 0)
+        } catch (t: Throwable) {
+            thrown = t
+        }
+        assertThat(thrown).isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("rankerTimeoutMillis must be positive")
+    }
+
+    @Test
+    fun `generate throws IllegalArgumentException for NaN diversityWeight`() = runTest {
+        val engine = ConstraintNativeEngine(DeterministicSolver())
+        var thrown: Throwable? = null
+        try {
+            engine.generate(solveRequest, diversityWeight = Double.NaN)
+        } catch (t: Throwable) {
+            thrown = t
+        }
+        assertThat(thrown).isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("diversityWeight must be finite and in 0.0..1.0")
+    }
+
+    @Test
+    fun `generate propagates AssertionError from ranker`() = runTest {
+        val engine = ConstraintNativeEngine(DeterministicSolver())
+        val mockRanker = GenerativeRanker {
+            throw AssertionError("internal error")
+        }
+
+        var thrown: Throwable? = null
+        try {
+            engine.generate(solveRequest, ranker = mockRanker, renderer = testRenderer)
+        } catch (t: Throwable) {
+            thrown = t
+        }
+        assertThat(thrown).isInstanceOf(AssertionError::class.java)
+            .hasMessageContaining("internal error")
     }
 }

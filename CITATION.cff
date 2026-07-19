@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using these metadata."
+title: "Constraint-Native Generative Engine"
+authors:
+  - name: "Constraint-Native Authors"
+version: 0.1.0-alpha
+license: Apache-2.0
+repository-code: "https://github.com/constraint-native/constraint-native-engine"

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "generatedOn": "2026-07-19T16:33:09.594779Z",
+  "osName": "Mac OS X",
+  "osArchitecture": "aarch64",
+  "jvm": "21.0.3",
+  "processorDescription": "Apple Silicon reference machine",
+  "warmups": 5,
+  "samples": 30,
+  "scenarios": [
+    {
+      "inventorySize": 25,
+      "p50Millis": 57.191333,
+      "p95Millis": 96.002042
+    },
+    {
+      "inventorySize": 100,
+      "p50Millis": 777.830625,
+      "p95Millis": 951.2615
+    },
+    {
+      "inventorySize": 500,
+      "p50Millis": 3920.808875,
+      "p95Millis": 4207.009667
+    },
+    {
+      "inventorySize": 1000,
+      "p50Millis": 6909.821417,
+      "p95Millis": 7158.10125
+    }
+  ]
+}

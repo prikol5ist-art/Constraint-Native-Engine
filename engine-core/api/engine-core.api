@@ -291,10 +291,10 @@ public final class io/github/constraintnative/core/SearchMode : java/lang/Enum {
 }
 
 public final class io/github/constraintnative/core/SearchTermination : java/lang/Enum {
+	public static final field BOUNDED_SEARCH_COMPLETED Lio/github/constraintnative/core/SearchTermination;
 	public static final field EXHAUSTIVE Lio/github/constraintnative/core/SearchTermination;
 	public static final field INFEASIBLE Lio/github/constraintnative/core/SearchTermination;
 	public static final field NODE_BUDGET_EXHAUSTED Lio/github/constraintnative/core/SearchTermination;
-	public static final field SOLUTION_LIMIT_REACHED Lio/github/constraintnative/core/SearchTermination;
 	public static final field TIME_BUDGET_EXHAUSTED Lio/github/constraintnative/core/SearchTermination;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lio/github/constraintnative/core/SearchTermination;
@@ -381,7 +381,7 @@ public final class io/github/constraintnative/core/SolutionId$Companion {
 }
 
 public final class io/github/constraintnative/core/SolveRequest {
-	public fun <init> (Ljava/util/List;Ljava/util/List;Ljava/lang/Object;Ljava/util/List;Ljava/util/List;ILio/github/constraintnative/core/SearchMode;Lio/github/constraintnative/core/SearchBudget;J)V
+	public fun <init> (Ljava/util/List;Ljava/util/List;Ljava/lang/Object;Ljava/util/List;Ljava/util/List;ILio/github/constraintnative/core/SearchMode;Lio/github/constraintnative/core/SearchBudget;)V
 	public final fun component1 ()Ljava/util/List;
 	public final fun component2 ()Ljava/util/List;
 	public final fun component3 ()Ljava/lang/Object;
@@ -390,9 +390,8 @@ public final class io/github/constraintnative/core/SolveRequest {
 	public final fun component6 ()I
 	public final fun component7 ()Lio/github/constraintnative/core/SearchMode;
 	public final fun component8 ()Lio/github/constraintnative/core/SearchBudget;
-	public final fun component9 ()J
-	public final fun copy (Ljava/util/List;Ljava/util/List;Ljava/lang/Object;Ljava/util/List;Ljava/util/List;ILio/github/constraintnative/core/SearchMode;Lio/github/constraintnative/core/SearchBudget;J)Lio/github/constraintnative/core/SolveRequest;
-	public static synthetic fun copy$default (Lio/github/constraintnative/core/SolveRequest;Ljava/util/List;Ljava/util/List;Ljava/lang/Object;Ljava/util/List;Ljava/util/List;ILio/github/constraintnative/core/SearchMode;Lio/github/constraintnative/core/SearchBudget;JILjava/lang/Object;)Lio/github/constraintnative/core/SolveRequest;
+	public final fun copy (Ljava/util/List;Ljava/util/List;Ljava/lang/Object;Ljava/util/List;Ljava/util/List;ILio/github/constraintnative/core/SearchMode;Lio/github/constraintnative/core/SearchBudget;)Lio/github/constraintnative/core/SolveRequest;
+	public static synthetic fun copy$default (Lio/github/constraintnative/core/SolveRequest;Ljava/util/List;Ljava/util/List;Ljava/lang/Object;Ljava/util/List;Ljava/util/List;ILio/github/constraintnative/core/SearchMode;Lio/github/constraintnative/core/SearchBudget;ILjava/lang/Object;)Lio/github/constraintnative/core/SolveRequest;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getCandidates ()Ljava/util/List;
 	public final fun getContext ()Ljava/lang/Object;
@@ -400,7 +399,6 @@ public final class io/github/constraintnative/core/SolveRequest {
 	public final fun getHardConstraints ()Ljava/util/List;
 	public final fun getSearchBudget ()Lio/github/constraintnative/core/SearchBudget;
 	public final fun getSearchMode ()Lio/github/constraintnative/core/SearchMode;
-	public final fun getSeed ()J
 	public final fun getSlots ()Ljava/util/List;
 	public final fun getSoftScorers ()Ljava/util/List;
 	public fun hashCode ()I

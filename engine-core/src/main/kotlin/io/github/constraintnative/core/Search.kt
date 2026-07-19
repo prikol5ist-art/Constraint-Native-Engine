@@ -28,8 +28,7 @@ public data class SolveRequest<A, C>(
     val softScorers: List<SoftScorer<A, C>>,
     val desiredSolutions: Int,
     val searchMode: SearchMode,
-    val searchBudget: SearchBudget,
-    val seed: Long
+    val searchBudget: SearchBudget
 ) {
     init {
         require(desiredSolutions in 1..100) {
@@ -57,7 +56,7 @@ public data class FeasibleSolution<A>(
 
 public enum class SearchTermination {
     EXHAUSTIVE,
-    SOLUTION_LIMIT_REACHED,
+    BOUNDED_SEARCH_COMPLETED,
     NODE_BUDGET_EXHAUSTED,
     TIME_BUDGET_EXHAUSTED,
     INFEASIBLE

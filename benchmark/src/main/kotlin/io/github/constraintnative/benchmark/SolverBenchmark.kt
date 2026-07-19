@@ -47,8 +47,7 @@ public open class SolverBenchmark {
             softScorers = listOf(TemperatureScorer(), OccasionScorer(), LayerScorer(), ColorHarmonyScorer()),
             desiredSolutions = 5,
             searchMode = SearchMode.EXACT,
-            searchBudget = budget,
-            seed = 42L
+            searchBudget = budget
         )
 
         beamRequest = exactRequest.copy(

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <title>Constraint-Native Generative Engine Social Preview</title>
+  <desc>Visual comparison showing 99.45% reduction: Inventory-First Payload (100%) vs Constraint-Native Payload (0.55%)</desc>
+  <rect width="1280" height="640" fill="#121212" rx="16"/>
+  
+  <!-- Title & Subtitle -->
+  <text x="80" y="100" fill="#ffffff" font-size="44" font-weight="bold">Constraint-Native Generative Engine</text>
+  <text x="80" y="150" fill="#aaaaaa" font-size="22">Local deterministic constraints eliminate LLM context bloat and guarantee correctness</text>
+  
+  <!-- Bar 1 (Inventory-First Payload) -->
+  <text x="80" y="240" fill="#888888" font-size="20" font-weight="bold">Inventory-First Payload (100%)</text>
+  <rect x="80" y="260" width="800" height="40" fill="#444444" rx="6"/>
+  <text x="900" y="288" fill="#ffffff" font-size="22" font-weight="bold">73,593 bytes (baseline)</text>
+  
+  <!-- Bar 2 (Constraint-Native Payload) -->
+  <text x="80" y="360" fill="#4caf50" font-size="20" font-weight="bold">Constraint-Native Payload (0.55%)</text>
+  <rect x="80" y="380" width="4" height="40" fill="#4caf50" rx="2"/>
+  <text x="900" y="408" fill="#4caf50" font-size="22" font-weight="bold">405 bytes (99.45% reduction)</text>
+  
+  <!-- Massive Badge / Statement -->
+  <text x="80" y="520" fill="#4caf50" font-size="64" font-weight="bold">99.45% Less Context</text>
+  <text x="80" y="570" fill="#888888" font-size="22">0 hard-constraint violations &amp; 0 accepted unknown IDs</text>
+</svg>

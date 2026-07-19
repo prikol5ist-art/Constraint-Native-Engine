@@ -9,6 +9,21 @@ public class GeminiGenerativeRanker(
     private val transport: GeminiTransport
 ) : GenerativeRanker {
 
+    private companion object {
+        private const val MAX_TRANSPORT_RESPONSE_CHARS = 256 * 1024
+        private const val MAX_RANKING_JSON_CHARS = 64 * 1024
+    }
+
+    private val envelopeJson = Json {
+        ignoreUnknownKeys = true
+        isLenient = false
+    }
+
+    private val rankingJson = Json {
+        ignoreUnknownKeys = false
+        isLenient = false
+    }
+
     private val strictJson = Json {
         ignoreUnknownKeys = false
         isLenient = false
@@ -50,11 +65,19 @@ public class GeminiGenerativeRanker(
         val requestJson = strictJson.encodeToString(geminiRequest)
         val responseJson = transport.generateContent(requestJson)
 
-        val geminiResponse = strictJson.decodeFromString<GeminiGenerateResponse>(responseJson)
-        val candidateText = geminiResponse.candidates.firstOrNull()?.content?.parts?.firstOrNull()?.text
-            ?: throw RuntimeException("Empty response from Gemini model")
+        require(responseJson.length <= MAX_TRANSPORT_RESPONSE_CHARS) {
+            "Gemini transport response exceeds $MAX_TRANSPORT_RESPONSE_CHARS characters"
+        }
 
-        val rankingDto = strictJson.decodeFromString<GeminiRankingResponseDto>(candidateText)
+        val geminiResponse = envelopeJson.decodeFromString<GeminiGenerateResponse>(responseJson)
+        val candidateText = geminiResponse.candidates.firstOrNull()?.content?.parts?.firstOrNull()?.text
+            ?: throw IllegalArgumentException("Empty response from Gemini model")
+
+        require(candidateText.length <= MAX_RANKING_JSON_CHARS) {
+            "Gemini ranking JSON exceeds $MAX_RANKING_JSON_CHARS characters"
+        }
+
+        val rankingDto = rankingJson.decodeFromString<GeminiRankingResponseDto>(candidateText)
 
         return RankingResponse(
             rankedSolutions = rankingDto.ranked.map { dto ->

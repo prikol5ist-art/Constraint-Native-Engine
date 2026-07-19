@@ -2,6 +2,7 @@ package io.github.constraintnative.solver
 
 import io.github.constraintnative.core.*
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import java.util.Collections
 
@@ -39,14 +40,14 @@ class ExactSolverTest {
             ),
             desiredSolutions = 2,
             searchMode = SearchMode.EXACT,
-            searchBudget = defaultBudget,
-            seed = 42L
+            searchBudget = defaultBudget
         )
 
         val result = solver.solve(request)
 
         assertThat(result.solutions).hasSize(2)
-        assertThat(result.termination).isEqualTo(SearchTermination.SOLUTION_LIMIT_REACHED)
+        assertThat(result.termination).isEqualTo(SearchTermination.EXHAUSTIVE)
+
 
         val firstSol = result.solutions[0]
         val secondSol = result.solutions[1]
@@ -77,8 +78,7 @@ class ExactSolverTest {
             softScorers = emptyList(),
             desiredSolutions = 2,
             searchMode = SearchMode.EXACT,
-            searchBudget = defaultBudget,
-            seed = 42L
+            searchBudget = defaultBudget
         )
 
         val result = solver.solve(request)
@@ -105,8 +105,7 @@ class ExactSolverTest {
             softScorers = emptyList(),
             desiredSolutions = 2,
             searchMode = SearchMode.EXACT,
-            searchBudget = defaultBudget,
-            seed = 42L
+            searchBudget = defaultBudget
         )
 
         val result = solver.solve(request)
@@ -138,8 +137,7 @@ class ExactSolverTest {
                 softScorers = emptyList(),
                 desiredSolutions = 2,
                 searchMode = SearchMode.EXACT,
-                searchBudget = defaultBudget,
-                seed = 42L
+                searchBudget = defaultBudget
             )
 
             val result = solver.solve(request)
@@ -147,5 +145,77 @@ class ExactSolverTest {
             val resultIds = result.solutions.map { it.id }
             assertThat(resultIds).containsExactlyInAnyOrderElementsOf(expectedIds)
         }
+    }
+
+    @Test
+    fun `exact search returns the highest-scoring later solution`() {
+        val slot = SlotId("slot")
+        val low = Candidate(CandidateId("a-low"), "low", setOf(slot))
+        val high = Candidate(CandidateId("z-high"), "high", setOf(slot))
+        val request = SolveRequest(
+            candidates = listOf(low, high),
+            slots = listOf(SlotRequirement(slot, 1, 1)),
+            context = Unit,
+            hardConstraints = emptyList(),
+            softScorers = listOf(SoftScorer { assembly, _ ->
+                val score = if (assembly.assignments.single().candidate.id == high.id) 100.0 else 1.0
+                ScoreComponent("score", score)
+            }),
+            desiredSolutions = 1,
+            searchMode = SearchMode.EXACT,
+            searchBudget = SearchBudget(100, 5_000, 1)
+        )
+
+        val result = DeterministicSolver().solve(request)
+
+        assertThat(result.termination).isEqualTo(SearchTermination.EXHAUSTIVE)
+        assertThat(result.solutions.single().assignments.single().candidate.id).isEqualTo(high.id)
+    }
+
+    @Test
+    fun `rejects a non-finite accumulated total score`() {
+        val slot = SlotId("slot")
+        val candidate = Candidate(CandidateId("candidate"), Unit, setOf(slot))
+        val request = SolveRequest(
+            candidates = listOf(candidate),
+            slots = listOf(SlotRequirement(slot, 1, 1)),
+            context = Unit,
+            hardConstraints = emptyList(),
+            softScorers = listOf(
+                SoftScorer { _, _ -> ScoreComponent("first", Double.MAX_VALUE) },
+                SoftScorer { _, _ -> ScoreComponent("second", Double.MAX_VALUE) }
+            ),
+            desiredSolutions = 1,
+            searchMode = SearchMode.EXACT,
+            searchBudget = SearchBudget(100, 5_000, 1)
+        )
+
+        assertThatThrownBy { DeterministicSolver().solve(request) }
+            .isInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("Total score must be finite")
+    }
+
+    @Test
+    fun `exact search respects node budget and reports node budget exhausted`() {
+        val slot = SlotId("slot")
+        val cand1 = Candidate(CandidateId("c1"), Unit, setOf(slot))
+        val cand2 = Candidate(CandidateId("c2"), Unit, setOf(slot))
+        val request = SolveRequest(
+            candidates = listOf(cand1, cand2),
+            slots = listOf(SlotRequirement(slot, 1, 1)),
+            context = Unit,
+            hardConstraints = emptyList(),
+            softScorers = emptyList(),
+            desiredSolutions = 2,
+            searchMode = SearchMode.EXACT,
+            searchBudget = SearchBudget(
+                maxExpandedNodes = 1,
+                maxDurationMillis = 5000L,
+                beamWidth = 10
+            )
+        )
+
+        val result = DeterministicSolver().solve(request)
+        assertThat(result.termination).isEqualTo(SearchTermination.NODE_BUDGET_EXHAUSTED)
     }
 }
