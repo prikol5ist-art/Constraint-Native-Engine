@@ -26,7 +26,7 @@ jobs:
           distribution: temurin
           java-version: '17'
       - name: Validate Gradle wrapper
-        uses: gradle/actions/wrapper-validation@ed408507eac070d1f99cc633dbcf757c94c7933a
+        uses: gradle/actions/wrapper-validation@9c971963bec38e04b3d30dcc455b5382be2fdbfb
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a
       - name: Test and verify public contract
